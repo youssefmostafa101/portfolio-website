@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /index.html
+Disallow: /onboarding.html
+Disallow: /admin.html
+Disallow: /availability.json
+
+Sitemap: https://yusefname.info/sitemap.xml

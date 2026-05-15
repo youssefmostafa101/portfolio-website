@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — Availability</title>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="theme-color" content="#0A0A0B" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="onboarding.css" />
+
+  <style>
+    .admin-shell { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 48px 20px; }
+    .admin-card { max-width: 560px; width: 100%; background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 40px; }
+    .admin-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 40px; color: var(--text-primary); margin-bottom: 8px; }
+    .admin-subtitle { color: var(--text-secondary); margin-bottom: 32px; font-size: 15px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .form-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary); }
+    .form-input {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 12px 14px;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      width: 100%;
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .actions { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+    .status-msg { margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--accent); min-height: 18px; }
+    .login-shell { max-width: 360px; }
+    .help-text {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      line-height: 1.6;
+      margin-top: 24px;
+      padding: 16px;
+      background: var(--bg-primary);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+    }
+  </style>
+</head>
+<body class="bg-bg-primary text-text-primary font-sans antialiased">
+
+  <div class="admin-shell">
+
+    <!-- LOGIN -->
+    <div id="login" class="admin-card login-shell">
+      <p class="mono-label" style="color: var(--accent); margin-bottom: 16px;">PRIVATE · ADMIN</p>
+      <h1 class="admin-title">Sign in.</h1>
+      <p class="admin-subtitle">This page is only meant for you. Enter the admin passphrase.</p>
+
+      <div class="form-group">
+        <label class="form-label" for="pwInput">PASSPHRASE</label>
+        <input id="pwInput" class="form-input" type="password" autocomplete="current-password" />
+      </div>
+      <div class="actions">
+        <button id="loginBtn" class="btn-primary">Unlock</button>
+      </div>
+      <p id="loginMsg" class="status-msg"></p>
+      <p class="help-text">
+        Default passphrase is <code class="inline-code">change-me</code>. Change it in <code class="inline-code">admin.html</code> (constant <code class="inline-code">ADMIN_PASSPHRASE</code>).
+        This is friction, not security — the admin panel just writes to your browser's localStorage and lets you download <code class="inline-code">availability.json</code> to commit.
+      </p>
+    </div>
+
+    <!-- PANEL -->
+    <div id="panel" class="admin-card" hidden>
+      <p class="mono-label" style="color: var(--accent); margin-bottom: 16px;">AVAILABILITY · CONFIG</p>
+      <h1 class="admin-title">Working hours.</h1>
+      <p class="admin-subtitle">Update your timezone and hours when you travel. The widget on <code class="inline-code">/onboarding.html</code> picks these up.</p>
+
+      <div class="form-group">
+        <label class="form-label" for="tzSelect">MY CURRENT TIMEZONE</label>
+        <select id="tzSelect" class="form-input"></select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="locationLabel">LOCATION LABEL <span style="text-transform:none; color: var(--text-tertiary);">(shown to client)</span></label>
+        <input id="locationLabel" class="form-input" type="text" placeholder="e.g. Cairo" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="startHour">AVAILABLE FROM</label>
+          <input id="startHour" class="form-input" type="time" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="endHour">AVAILABLE UNTIL</label>
+          <input id="endHour" class="form-input" type="time" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="saveBtn" class="btn-primary">Save</button>
+        <button id="downloadBtn" class="btn-ghost">Download availability.json</button>
+        <button id="resetBtn" class="btn-ghost">Clear Local Override</button>
+      </div>
+
+      <p id="statusMsg" class="status-msg"></p>
+
+      <p class="help-text">
+        <strong style="color: var(--text-primary);">How this works:</strong><br />
+        <strong>Save</strong> writes to your browser's localStorage — instant on this device, won't sync across browsers.<br />
+        <strong>Download availability.json</strong> gives you a file to drop into the repo root and commit. That syncs the config for every visitor.<br />
+        <strong>Clear Local Override</strong> wipes localStorage so the live <code class="inline-code">availability.json</code> takes effect again.
+      </p>
+
+      <div class="actions" style="margin-top: 24px;">
+        <a href="onboarding.html" class="text-link" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em;">← VIEW ONBOARDING PAGE</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (() => {
+    // ============================================
+    // CHANGE THIS in your own copy — it's just friction.
+    // ============================================
+    const ADMIN_PASSPHRASE = 'change-me';
+
+    const COMMON_TIMEZONES = [
+      'Africa/Cairo',
+      'Europe/London',
+      'Europe/Berlin',
+      'Europe/Istanbul',
+      'Asia/Dubai',
+      'Asia/Riyadh',
+      'Asia/Karachi',
+      'Asia/Bangkok',
+      'Asia/Singapore',
+      'Asia/Hong_Kong',
+      'Asia/Tokyo',
+      'Australia/Sydney',
+      'America/New_York',
+      'America/Chicago',
+      'America/Denver',
+      'America/Los_Angeles',
+      'America/Sao_Paulo',
+      'America/Mexico_City',
+      'UTC',
+    ];
+
+    // ============================================
+    // Login
+    // ============================================
+    const login = document.getElementById('login');
+    const panel = document.getElementById('panel');
+    const loginBtn = document.getElementById('loginBtn');
+    const pwInput = document.getElementById('pwInput');
+    const loginMsg = document.getElementById('loginMsg');
+
+    function unlock() {
+      const val = pwInput.value.trim();
+      if (val === ADMIN_PASSPHRASE) {
+        sessionStorage.setItem('admin_unlocked', '1');
+        showPanel();
+      } else {
+        loginMsg.textContent = '✗ Wrong passphrase.';
+        loginMsg.style.color = '#EF4444';
+        pwInput.value = '';
+      }
+    }
+    loginBtn.addEventListener('click', unlock);
+    pwInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') unlock();
+    });
+
+    function showPanel() {
+      login.setAttribute('hidden', '');
+      panel.removeAttribute('hidden');
+      hydrateForm();
+    }
+
+    if (sessionStorage.getItem('admin_unlocked') === '1') {
+      showPanel();
+    } else {
+      pwInput.focus();
+    }
+
+    // ============================================
+    // Form
+    // ============================================
+    const tzSelect = document.getElementById('tzSelect');
+    const locationLabelInput = document.getElementById('locationLabel');
+    const startHourInput = document.getElementById('startHour');
+    const endHourInput = document.getElementById('endHour');
+    const saveBtn = document.getElementById('saveBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const statusMsg = document.getElementById('statusMsg');
+
+    // Populate timezone select with common ones first, then full list if supported
+    function populateTimezones() {
+      const seen = new Set();
+      const opts = [];
+
+      try {
+        if (typeof Intl.supportedValuesOf === 'function') {
+          const all = Intl.supportedValuesOf('timeZone');
+          // Put commons at top, then the rest
+          COMMON_TIMEZONES.forEach(tz => { if (!seen.has(tz)) { seen.add(tz); opts.push(tz); } });
+          all.forEach(tz => { if (!seen.has(tz)) { seen.add(tz); opts.push(tz); } });
+        } else {
+          COMMON_TIMEZONES.forEach(tz => { opts.push(tz); });
+        }
+      } catch (e) {
+        COMMON_TIMEZONES.forEach(tz => { opts.push(tz); });
+      }
+
+      tzSelect.innerHTML = opts.map(tz => `<option value="${tz}">${tz}</option>`).join('');
+    }
+
+    function hydrateForm() {
+      populateTimezones();
+
+      let cfg = { timezone: 'Africa/Cairo', startHour: 6, endHour: 16, locationLabel: 'Cairo' };
+
+      try {
+        const local = localStorage.getItem('availability_config');
+        if (local) cfg = { ...cfg, ...JSON.parse(local) };
+      } catch (e) {}
+
+      tzSelect.value = cfg.timezone;
+      locationLabelInput.value = cfg.locationLabel || '';
+      startHourInput.value = hourToTimeString(cfg.startHour);
+      endHourInput.value = hourToTimeString(cfg.endHour);
+    }
+
+    function hourToTimeString(h) {
+      const hours = Math.floor(h);
+      const minutes = Math.round((h - hours) * 60);
+      return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+    }
+
+    function timeStringToHour(s) {
+      if (!s) return 0;
+      const [h, m] = s.split(':').map(n => parseInt(n, 10));
+      return h + (m / 60);
+    }
+
+    function readForm() {
+      return {
+        timezone: tzSelect.value,
+        locationLabel: locationLabelInput.value.trim() || tzSelect.value.split('/').pop().replace(/_/g, ' '),
+        startHour: timeStringToHour(startHourInput.value),
+        endHour: timeStringToHour(endHourInput.value),
+      };
+    }
+
+    saveBtn.addEventListener('click', () => {
+      const cfg = readForm();
+      localStorage.setItem('availability_config', JSON.stringify(cfg));
+      statusMsg.textContent = '✓ Saved to this browser. Refresh /onboarding.html to see it live.';
+      statusMsg.style.color = '#34D399';
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      const cfg = readForm();
+      const json = JSON.stringify(cfg, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'availability.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      statusMsg.textContent = '✓ Downloaded. Replace availability.json in your repo and commit.';
+      statusMsg.style.color = 'var(--accent)';
+    });
+
+    resetBtn.addEventListener('click', () => {
+      localStorage.removeItem('availability_config');
+      statusMsg.textContent = '✓ Local override cleared. The committed availability.json takes effect now.';
+      statusMsg.style.color = 'var(--text-secondary)';
+      hydrateForm();
+    });
+  })();
+  </script>
+</body>
+</html>
