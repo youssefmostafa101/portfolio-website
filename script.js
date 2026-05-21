@@ -81,9 +81,55 @@
   }
 
   // ============================================
-  // Smooth scroll (with header offset)
-  // Browser handles via CSS scroll-behavior, this just closes mobile menu
+  // Flow modal (Welcome Flow on the Work section)
   // ============================================
-  // Already handled by CSS smooth-behavior + mobile menu auto-close above
+  const flowModal = document.getElementById('flowModal');
+  const flowTriggers = document.querySelectorAll('[data-flow]');
+  let lastFocusedTrigger = null;
+
+  function openFlow(trigger) {
+    if (!flowModal) return;
+    lastFocusedTrigger = trigger || document.activeElement;
+    flowModal.removeAttribute('hidden');
+    document.body.classList.add('flow-open');
+    // Focus the close button so esc/tab works immediately
+    const close = flowModal.querySelector('.flow-modal-close');
+    if (close) close.focus();
+  }
+
+  function closeFlow() {
+    if (!flowModal) return;
+    flowModal.setAttribute('hidden', '');
+    document.body.classList.remove('flow-open');
+    if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
+      lastFocusedTrigger.focus();
+    }
+  }
+
+  flowTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => openFlow(trigger));
+  });
+
+  if (flowModal) {
+    flowModal.querySelectorAll('[data-close]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        // For anchor-tagged close (e.g. Book A Discovery Call), let nav proceed first
+        const isAnchor = el.tagName === 'A' && el.getAttribute('href');
+        if (isAnchor) {
+          // Close, then let the default scroll happen
+          closeFlow();
+        } else {
+          e.preventDefault();
+          closeFlow();
+        }
+      });
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && flowModal && !flowModal.hasAttribute('hidden')) {
+      closeFlow();
+    }
+  });
 
 })();

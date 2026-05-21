@@ -38,15 +38,15 @@ Then open <http://localhost:8080/>.
 
 1. Push this repo to GitHub.
 2. **Repo Settings → Pages → Source:** select the `main` branch (root).
-3. Set your custom domain in `CNAME` (currently `yusefname.info`).
-4. In your registrar, point a CNAME DNS record for `yusefname.info`
+3. Set your custom domain in `CNAME` (currently `yusef.info`).
+4. In your registrar, point a CNAME DNS record for `yusef.info`
    to `<your-username>.github.io`.
 
 After it's live:
 
-- Public portfolio → `https://yusefname.info/`
-- Private onboarding → `https://yusefname.info/onboarding.html`
-- Admin panel → `https://yusefname.info/admin.html`
+- Public portfolio → `https://yusef.info/`
+- Private onboarding → `https://yusef.info/onboarding.html`
+- Admin panel → `https://yusef.info/admin.html`
 
 The onboarding page is `noindex/nofollow` and not linked anywhere on the
 public site or in the sitemap. It's reachable only by direct URL — share
@@ -74,22 +74,27 @@ everything is client-side.
 
 ## What's still placeholder
 
-Swap these in before going live:
+Swap these in before sharing the URL widely:
 
-- **Email** — currently `hello@yusefname.info` in:
-  - `index.html` (final CTA section)
-  - `onboarding.html` (Klaviyo + Shopify access steps, communication section)
-- **Calendly URL** — `https://calendly.com/yusef/discovery-call` in `index.html`
+- **Calendly URL** — `https://calendly.com/yusef/discovery-call` in
+  `index.html` (final CTA + header "Book Call" link)
 - **Social links** — `#` placeholders in the footer of `index.html`
-- **CNAME domain** — `yusefname.info` in `CNAME` and meta tags
-- **Email screenshots** — six placeholder cards in the Recent Work section
-- **Google Form embed** — placeholder block in onboarding Chapter 2 (replace
-  with your live form's `<iframe>` — sample code commented in the HTML)
+  (Twitter / LinkedIn / Instagram)
+- **Google Form embed** — placeholder block in onboarding Chapter 2
+  (replace with your live form's `<iframe>` — sample code commented in
+  the HTML)
 - **Slack invite link** — `#` in onboarding Chapter 5
 - **WhatsApp number** — `+00 000 000 0000` in onboarding Chapter 5
 - **Google Drive "Brand Vault" link** — `#` in onboarding Chapter 4
   (one per client — swap before sending each link)
-- **Admin passphrase** — `change-me` in `admin.html`
+- **Admin passphrase** — `change-me` in `admin.html` (line 133)
+- **Klaviyo / Shopify access screenshots** — onboarding Chapter 3 has
+  placeholder boxes (`<div class="screenshot-placeholder">`) where the
+  real screenshots will go. Drop them into `/assets/` and swap the
+  placeholder divs for `<img>` tags.
+- **Founder Name placeholders** — the six CLiYRA welcome flow emails in
+  `/assets/work/` contain `[Founder Name]` text. Re-export them from
+  Figma with your real name before launch.
 
 ## Making updates
 

@@ -5,4 +5,4 @@ Disallow: /onboarding.html
 Disallow: /admin.html
 Disallow: /availability.json
 
-Sitemap: https://yusefname.info/sitemap.xml
+Sitemap: https://yusef.info/sitemap.xml
