@@ -930,3 +930,426 @@ body::before {
   html { scroll-behavior: auto; }
   .scroll-line { animation: none; }
 }
+
+/* ============================================
+   PORTFOLIO — BRAND GROUPS + STATUS PILLS
+   ============================================ */
+.brand-group {
+  margin-top: 80px;
+  padding-top: 64px;
+  border-top: 1px solid var(--border-subtle);
+}
+.brand-group:first-of-type {
+  margin-top: 64px;
+  padding-top: 0;
+  border-top: none;
+}
+
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+@media (min-width: 768px) {
+  .brand-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+}
+
+.brand-name {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 7px;
+  flex-shrink: 0;
+}
+.dot-client { background: #4ADE80; }
+.dot-prototype { background: #FB923C; }
+.dot-genre { background: transparent; border: 1.5px solid #A1A1AA; }
+
+/* Email pair */
+.email-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 768px) {
+  .email-pair { grid-template-columns: 1fr 1fr; gap: 28px; }
+}
+
+.work-email {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+}
+.work-email-btn {
+  display: block;
+  padding: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  cursor: zoom-in;
+  width: 100%;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.work-email-btn:hover {
+  border-color: rgba(201, 155, 94, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 50px -22px rgba(201, 155, 94, 0.22);
+}
+.work-email-btn img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* show the top of tall email captures, capped so pairs stay aligned */
+  max-height: 560px;
+  object-fit: cover;
+  object-position: top center;
+}
+.work-email-caption {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.brand-narrative {
+  margin-top: 32px;
+  padding-left: 20px;
+  border-left: 2px solid var(--accent);
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.5;
+  color: var(--text-primary);
+  max-width: 70ch;
+}
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 200ms ease;
+}
+.lightbox[hidden] { display: none; }
+.lightbox.closing { opacity: 0; }
+.lightbox.opening { opacity: 0; }
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 11, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: zoom-out;
+}
+
+.lb-stage {
+  position: relative;
+  z-index: 1;
+  width: 90vw;
+  height: 82vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: none;
+}
+.lb-img {
+  max-width: 90vw;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: translate(0px, 0px) scale(1);
+  transform-origin: center center;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.lb-img.dragging { cursor: grabbing; transition: none; }
+.lb-img.smooth { transition: transform 180ms ease; }
+
+.lb-btn {
+  position: absolute;
+  z-index: 2;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #FAFAFA;
+  border-radius: 4px;
+  height: 38px;
+  min-width: 38px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.lb-btn:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255,255,255,0.7); }
+.lb-btn-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.lb-close { top: 24px; left: 24px; }
+.lb-controls {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+}
+.lb-controls .lb-btn { position: static; }
+
+.lb-caption {
+  position: relative;
+  z-index: 1;
+  margin-top: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+body.lb-open { overflow: hidden; }
+
+/* ============================================
+   LEAD MAGNET — floating button
+   ============================================ */
+.lead-fab {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 90;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: 1px solid var(--bg-primary);
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+.lead-fab:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+.lead-fab-arrow {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+.lead-fab:hover .lead-fab-arrow { transform: translateX(4px); }
+.lead-fab-icon { display: none; }
+
+@media (max-width: 767px) {
+  .lead-fab {
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border-radius: 8px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--text-primary);
+    justify-content: center;
+  }
+  .lead-fab-full { display: none; }
+  .lead-fab-icon { display: inline-flex; align-items: center; justify-content: center; }
+}
+
+/* ============================================
+   LEAD MAGNET — modal
+   ============================================ */
+.lead-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.lead-modal[hidden] { display: none; }
+
+.lead-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 180ms ease;
+  cursor: pointer;
+}
+.lead-modal.visible .lead-modal-backdrop { opacity: 1; }
+
+.lead-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 48px;
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+  transform: scale(0.96);
+  opacity: 0;
+  transition: transform 240ms cubic-bezier(.2,.7,.2,1), opacity 240ms ease;
+}
+.lead-modal.visible .lead-modal-panel { transform: scale(1); opacity: 1; }
+@media (max-width: 520px) {
+  .lead-modal-panel { padding: 36px 28px; }
+}
+
+.lead-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+}
+.lead-modal-close:hover { color: var(--text-primary); }
+
+.lead-top-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 20px;
+}
+.lead-headline {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+.lead-subhead {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+.lead-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.lead-bullets li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+.lead-bullets li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+.lead-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 16px 24px;
+  border-radius: 8px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.lead-cta:hover { background: var(--accent); transform: translateY(-1px); }
+.lead-dismiss {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 16px;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+.lead-dismiss:hover { color: var(--text-secondary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lead-modal-panel, .lead-modal-backdrop, .lightbox, .lb-img.smooth { transition: none; }
+}

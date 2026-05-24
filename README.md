@@ -1,23 +1,42 @@
 # Yusef — Portfolio & Client Onboarding
 
-A single-page portfolio for a DTC email-marketing agency, plus a private
-client onboarding page that's reachable only by direct link.
+A single-page portfolio for a men's-skincare email specialist, plus a
+private client onboarding page that's reachable only by direct link.
 
 ## What's in here
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Public portfolio — 11 sections, dark editorial |
+| `index.html` | Public portfolio — dark editorial, 3-brand work grid, lightbox, lead magnet |
 | `onboarding.html` | Private client onboarding — 6 chapters, course-style |
 | `admin.html` | Local-only panel to update working hours / timezone |
 | `style.css` | Shared design system (typography, tokens, dark theme) |
 | `onboarding.css` | Onboarding-only styles (chapters, availability widget) |
-| `script.js` | Public-site behavior (nav, FAQ accordion, fade-ins) |
+| `script.js` | Public-site behavior (nav, FAQ, lightbox, lead-magnet modal) |
 | `onboarding.js` | Availability widget + timezone conversion |
 | `availability.json` | Working hours config (committed) |
+| `assets/work/` | Email previews (cliyra/labseries/brickell ×2 each) |
+| `assets/the-email-design-system.pdf` | Lead magnet download |
 | `robots.txt` | Allows public site, blocks onboarding & admin |
 | `sitemap.xml` | Public site only — onboarding never indexed |
 | `CNAME` | GitHub Pages custom domain |
+
+## Portfolio work section
+
+Three brand groups (CLiYRA = client, Lab Series + Brickell = prototypes),
+each with two clickable email previews + a narrative block. Status pills use
+colored dots: green = client, amber = prototype, outlined gray = genre tag.
+Clicking any email opens a zoom/pan lightbox (wheel to zoom, drag to pan,
+Esc / click-out / X to close). To swap an email, drop a new PNG over the
+matching file in `assets/work/` — filenames are `brand-NN.png`.
+
+## Lead magnet
+
+A floating button (bottom-right, off-white pill on desktop, icon square on
+mobile) and an auto-pop modal both offer `the-email-design-system.pdf`. The
+modal auto-opens once per browser session after 20s (skips if the visitor
+already clicked the button or is sitting on the contact section). State is
+tracked in `sessionStorage` under `yusef_leadmagnet_shown`.
 
 ## View locally
 
@@ -76,25 +95,28 @@ everything is client-side.
 
 Swap these in before sharing the URL widely:
 
-- **Calendly URL** — `https://calendly.com/yusef/discovery-call` in
-  `index.html` (final CTA + header "Book Call" link)
-- **Social links** — `#` placeholders in the footer of `index.html`
-  (Twitter / LinkedIn / Instagram)
+- **Instagram link** — footer `href="#"` in `index.html` (Twitter +
+  LinkedIn already removed)
 - **Google Form embed** — placeholder block in onboarding Chapter 2
   (replace with your live form's `<iframe>` — sample code commented in
   the HTML)
 - **Slack invite link** — `#` in onboarding Chapter 5
-- **WhatsApp number** — `+00 000 000 0000` in onboarding Chapter 5
 - **Google Drive "Brand Vault" link** — `#` in onboarding Chapter 4
   (one per client — swap before sending each link)
-- **Admin passphrase** — `change-me` in `admin.html` (line 133)
+- **Admin passphrase** — `change-me` in `admin.html`
 - **Klaviyo / Shopify access screenshots** — onboarding Chapter 3 has
   placeholder boxes (`<div class="screenshot-placeholder">`) where the
   real screenshots will go. Drop them into `/assets/` and swap the
   placeholder divs for `<img>` tags.
-- **Founder Name placeholders** — the six CLiYRA welcome flow emails in
-  `/assets/work/` contain `[Founder Name]` text. Re-export them from
-  Figma with your real name before launch.
+
+### Now live (no longer placeholder)
+
+- Email → `yusef@cliyra.com`
+- Calendly → `https://calendly.com/yusef-cliyra/15min`
+- WhatsApp → `+20 106 504 2688` (contact section)
+- Discovery call → "Book A 15-Min Discovery Call", 15-minute kickoff
+- Portfolio emails → real CLiYRA / Lab Series / Brickell previews
+- Lead magnet → `assets/the-email-design-system.pdf`
 
 ## Making updates
 
