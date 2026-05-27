@@ -220,4 +220,50 @@
   } else {
     init();
   }
+
+  // ============================================
+  // Screenshot placeholders — show empty state when image is missing
+  // ============================================
+  function wireScreenshots() {
+    document.querySelectorAll('.screenshot-placeholder img').forEach(img => {
+      const markEmpty = () => img.closest('.screenshot-placeholder').classList.add('empty');
+      // Already failed (e.g. cached 404) before this ran
+      if (img.complete && img.naturalWidth === 0) markEmpty();
+      img.addEventListener('error', markEmpty);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireScreenshots);
+  } else {
+    wireScreenshots();
+  }
+
+  // ============================================
+  // Referral form — submit via Formspree, inline success
+  // ============================================
+  const referralForm = document.getElementById('referralForm');
+  if (referralForm) {
+    referralForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = referralForm.querySelector('.btn-submit-ref');
+      if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+      const data = new FormData(referralForm);
+      try {
+        const res = await fetch(referralForm.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' },
+        });
+        if (res.ok) {
+          referralForm.outerHTML =
+            '<div class="referral-success"><p>Got it. I’ll reach out to them this week. ' +
+            'If they sign and pay, your 15% off lands on your next month’s invoice automatically.</p></div>';
+        } else {
+          if (btn) { btn.textContent = 'Error — try again'; btn.disabled = false; }
+        }
+      } catch (err) {
+        if (btn) { btn.textContent = 'Error — try again'; btn.disabled = false; }
+      }
+    });
+  }
 })();

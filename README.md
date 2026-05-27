@@ -7,19 +7,36 @@ private client onboarding page that's reachable only by direct link.
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Public portfolio — dark editorial, 3-brand work grid, lightbox, lead magnet |
-| `onboarding.html` | Private client onboarding — 6 chapters, course-style |
+| `index.html` | Public portfolio — work grid, lightbox, ROI calculator, lead magnet, gold cursor |
+| `onboarding.html` | Private onboarding — intake iframe, Klaviyo/Shopify guides, Week One, comms, referral |
+| `intake.html` | Multi-step client intake form (submits to Formspree); iframed into onboarding |
 | `admin.html` | Local-only panel to update working hours / timezone |
-| `style.css` | Shared design system (typography, tokens, dark theme) |
-| `onboarding.css` | Onboarding-only styles (chapters, availability widget) |
-| `script.js` | Public-site behavior (nav, FAQ, lightbox, lead-magnet modal) |
-| `onboarding.js` | Availability widget + timezone conversion |
+| `style.css` | Shared design system + ROI calculator + gold accent |
+| `onboarding.css` | Onboarding-only styles (hero, step guides, timeline, referral form) |
+| `script.js` | Public-site behavior (nav, FAQ, lightbox, lead magnet, ROI calc, cursor glow) |
+| `onboarding.js` | Availability widget, screenshot fallback, referral submit |
 | `availability.json` | Working hours config (committed) |
 | `assets/work/` | Email previews (cliyra/labseries/brickell ×2 each) |
+| `assets/onboarding/` | Klaviyo/Shopify access screenshots (kv-01…04, sh-01…05) — add PNGs here |
 | `assets/the-email-design-system.pdf` | Lead magnet download |
-| `robots.txt` | Allows public site, blocks onboarding & admin |
+| `robots.txt` | Allows public site, blocks onboarding / intake / admin |
 | `sitemap.xml` | Public site only — onboarding never indexed |
 | `CNAME` | GitHub Pages custom domain |
+
+## ROI calculator (main site, "— 05 · THE MATH")
+
+Two sliders (monthly revenue, current email %) drive live outputs against a 30%
+benchmark, with auto-detected retainer tier and a count-up animation. Edge cases:
+revenue < $30K, or current email % ≥ 30%, swap the outputs for a "book a call"
+message. Annual estimate = monthly uplift × 11.25 (accounts for the 60-day ramp).
+
+## Onboarding page
+
+Rebuilt to the new brief: hero → intake form (iframed `intake.html`) → Klaviyo
+4-step guide → Shopify 5-step guide → Week One timeline → communication (with the
+live availability indicator) → referral section. Screenshot boxes show a styled
+empty state until you drop real PNGs into `assets/onboarding/`. The referral form
+submits to Formspree with `form_type=referral` and swaps to an inline thank-you.
 
 ## Portfolio work section
 
@@ -95,28 +112,21 @@ everything is client-side.
 
 Swap these in before sharing the URL widely:
 
-- **Instagram link** — footer `href="#"` in `index.html` (Twitter +
-  LinkedIn already removed)
-- **Google Form embed** — placeholder block in onboarding Chapter 2
-  (replace with your live form's `<iframe>` — sample code commented in
-  the HTML)
-- **Slack invite link** — `#` in onboarding Chapter 5
-- **Google Drive "Brand Vault" link** — `#` in onboarding Chapter 4
-  (one per client — swap before sending each link)
+- **Instagram link** — footer `href="#"` in `index.html`
+- **Klaviyo / Shopify access screenshots** — drop PNGs named `kv-01…04` and
+  `sh-01…05` into `assets/onboarding/`. Until then the boxes show a styled
+  empty state (no broken-image icons).
+- **Slack** — the onboarding copy tells clients to confirm "via Slack," but
+  there's no Slack invite link element on the page yet. Say the word and I'll
+  add a "Join your workspace →" link wherever you want it.
 - **Admin passphrase** — `change-me` in `admin.html`
-- **Klaviyo / Shopify access screenshots** — onboarding Chapter 3 has
-  placeholder boxes (`<div class="screenshot-placeholder">`) where the
-  real screenshots will go. Drop them into `/assets/` and swap the
-  placeholder divs for `<img>` tags.
 
 ### Now live (no longer placeholder)
 
-- Email → `yusef@cliyra.com`
-- Calendly → `https://calendly.com/yusef-cliyra/15min`
-- WhatsApp → `+20 106 504 2688` (contact section)
-- Discovery call → "Book A 15-Min Discovery Call", 15-minute kickoff
-- Portfolio emails → real CLiYRA / Lab Series / Brickell previews
-- Lead magnet → `assets/the-email-design-system.pdf`
+- Email → `yusef@cliyra.com` · Calendly → `yusef-cliyra/15min` · WhatsApp → `+20 106 504 2688`
+- Intake form → hosted at `intake.html`, iframed into onboarding, submits to your Formspree
+- Brand Vault → Google Drive link already set inside the intake form (Section 06)
+- Portfolio emails, lead-magnet PDF, ROI calculator, referral form → all wired
 
 ## Making updates
 

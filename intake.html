@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Intake — Yusef</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0A0A0B;
+    --white: #FAFAF9;
+    --border: #E0DFD9;
+    --muted: #8A8A82;
+    --focus: #0A0A0B;
+    --error: #B84040;
+    --serif: 'Cormorant Garamond', serif;
+    --sans: 'Inter', sans-serif;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-rail {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: rgba(10,10,11,0.1);
+    z-index: 100;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--black);
+    transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 56px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 90;
+  }
+
+  .topbar-brand {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .topbar-step {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── PAGE LAYOUT ── */
+  .page-wrap {
+    padding-top: 56px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── FORM SECTIONS ── */
+  .section {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.32s ease, transform 0.32s ease;
+  }
+
+  .section.active {
+    display: flex;
+  }
+
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    background: var(--black);
+    color: var(--white);
+    padding: 48px 40px 40px;
+  }
+
+  .section-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+
+  .section-note {
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.65);
+    max-width: 560px;
+    font-weight: 300;
+  }
+
+  /* ── QUESTION BODY ── */
+  .section-body {
+    padding: 44px 40px 32px;
+    max-width: 720px;
+    width: 100%;
+    flex: 1;
+  }
+
+  .question {
+    margin-bottom: 32px;
+  }
+
+  .q-label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  .q-label .req {
+    color: var(--error);
+    margin-left: 3px;
+  }
+
+  .q-hint {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  textarea,
+  select {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 12px 14px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--black);
+    outline: none;
+    transition: border-color 0.18s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--black);
+  }
+
+  textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230A0A0B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+    cursor: pointer;
+  }
+
+  /* ── RADIO + CHECKBOX ── */
+  .radio-group, .check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .radio-option, .check-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: border-color 0.18s, background 0.18s;
+  }
+
+  .radio-option:hover, .check-option:hover {
+    border-color: var(--black);
+  }
+
+  .radio-option input, .check-option input {
+    width: auto;
+    min-width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: var(--black);
+    flex-shrink: 0;
+  }
+
+  .radio-option span, .check-option span {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--black);
+    font-weight: 400;
+  }
+
+  .radio-option:has(input:checked),
+  .check-option:has(input:checked) {
+    border-color: var(--black);
+    background: rgba(10,10,11,0.03);
+  }
+
+  /* ── TWO COLUMN ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* ── DIVIDER ── */
+  .q-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 8px 0 32px;
+  }
+
+  /* ── DRIVE BOX ── */
+  .drive-box {
+    border: 1px dashed var(--border);
+    border-radius: 2px;
+    padding: 24px;
+    text-align: center;
+    background: rgba(10,10,11,0.02);
+  }
+
+  .drive-box-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .drive-box p {
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .drive-box a {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 1px;
+  }
+
+  /* ── NAV FOOTER ── */
+  .nav-footer {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 24px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    position: sticky;
+    bottom: 0;
+    z-index: 80;
+  }
+
+  .btn-back {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.18s;
+  }
+
+  .btn-back:hover { color: var(--black); }
+  .btn-back:disabled { opacity: 0; pointer-events: none; }
+
+  .btn-next {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--black);
+    border: 1px solid var(--black);
+    border-radius: 2px;
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+  }
+
+  .btn-next:hover {
+    background: transparent;
+    color: var(--black);
+  }
+
+  .section-counter {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── SUCCESS STATE ── */
+  #success-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 56px);
+    text-align: center;
+    padding: 60px 40px;
+  }
+
+  #success-screen .success-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  #success-screen h1 {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--black);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  #success-screen p {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 440px;
+    margin: 0 auto 32px;
+  }
+
+  #success-screen a {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 2px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .topbar { padding: 0 20px; }
+    .section-header { padding: 36px 20px 32px; }
+    .section-title { font-size: 30px; }
+    .section-body { padding: 32px 20px 24px; }
+    .nav-footer { padding: 18px 20px; }
+    .two-col { grid-template-columns: 1fr; gap: 0; }
+    #success-screen { padding: 40px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-rail">
+  <div class="progress-fill" id="progress-fill" style="width: 14.28%"></div>
+</div>
+
+<div class="topbar">
+  <a href="https://yusef.info" class="topbar-brand">Yusef</a>
+  <span class="topbar-step" id="topbar-step">Client Intake</span>
+</div>
+
+<div class="page-wrap">
+
+  <form id="intake-form" action="https://formspree.io/f/xnjrlakr" method="POST">
+
+    <!-- ═══ SECTION 01 — BUSINESS BASICS ═══ -->
+    <div class="section active" id="s1">
+      <div class="section-header">
+        <div class="section-label">— 01 · BUSINESS BASICS</div>
+        <div class="section-title">Let's start with the fundamentals.</div>
+        <div class="section-note">Basic store info I need before I touch anything. Takes about 2 minutes.</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question">
+          <label class="q-label" for="q-biz-name">Full legal business name <span class="req">*</span></label>
+          <input type="text" id="q-biz-name" name="business_name" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-shopify-url">Shopify store URL <span class="req">*</span></label>
+          <div class="q-hint">e.g. yourstore.myshopify.com or your custom domain</div>
+          <input type="text" id="q-shopify-url" name="shopify_url" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-klaviyo-email">Email address on your Klaviyo account <span class="req">*</span></label>
+          <div class="q-hint">So I can confirm the invite hit the right inbox</div>
+          <input type="email" id="q-klaviyo-email" name="klaviyo_email" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label">Approximate monthly revenue <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="monthly_revenue" value="$30K – $50K" required><span>$30,000 – $50,000</span></label>
+            <label class="radio-option"><input type="radio" name="monthly_revenue" value="$50K – $100K"><span>$50,001 – $100,000</span></label>
+            <label class="radio-option"><input type="radio" name="monthly_revenue" value="$100K – $150K"><span>$100,001 – $150,000</span></label>
+            <label class="radio-option"><input type="radio" name="monthly_revenue" value="$150K+"><span>$150,001+</span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label">How long has the store been running? <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="store_age" value="Under 1 year" required><span>Less than 1 year</span></label>
+            <label class="radio-option"><input type="radio" name="store_age" value="1–2 years"><span>1–2 years</span></label>
+            <label class="radio-option"><input type="radio" name="store_age" value="2–4 years"><span>2–4 years</span></label>
+            <label class="radio-option"><input type="radio" name="store_age" value="4+ years"><span>4+ years</span></label>
+          </div>
+        </div>
+
+      </div>
+      <div class="nav-footer">
+        <button type="button" class="btn-back" disabled>← Back</button>
+        <span class="section-counter">01 of 07</span>
+        <button type="button" class="btn-next" onclick="nextSection()">Next →</button>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 02 — YOUR CUSTOMER ═══ -->
+    <div class="section" id="s2">
+      <div class="section-header">
+        <div class="section-label">— 02 · YOUR CUSTOMER</div>
+        <div class="section-title">Describe the man you're selling to.</div>
+        <div class="section-note">This is the most important section. Your answers shape every email I write. Vague = worse emails. Spend time here.</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question">
+          <label class="q-label" for="q-icp">Describe your ideal customer in one paragraph <span class="req">*</span></label>
+          <div class="q-hint">Age, lifestyle, what his skin problem is, what he's already tried, why he's skeptical.</div>
+          <textarea id="q-icp" name="icp" rows="5" required></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-reason1">The #1 reason someone doesn't buy from you <span class="req">*</span></label>
+          <div class="q-hint">"Trust" isn't an answer. "They don't believe a simple routine will clear their skin" is.</div>
+          <input type="text" id="q-reason1" name="objection_1" required>
+        </div>
+
+        <div class="two-col">
+          <div class="question">
+            <label class="q-label" for="q-reason2">Reason #2 <span class="req">*</span></label>
+            <input type="text" id="q-reason2" name="objection_2" required>
+          </div>
+          <div class="question">
+            <label class="q-label" for="q-reason3">Reason #3 <span class="req">*</span></label>
+            <input type="text" id="q-reason3" name="objection_3" required>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-result">What does your customer look like 90 days after using your product? <span class="req">*</span></label>
+          <div class="q-hint">Specific results — physical, emotional, social. What actually changed for him?</div>
+          <textarea id="q-result" name="customer_result" rows="4" required></textarea>
+        </div>
+
+      </div>
+      <div class="nav-footer">
+        <button type="button" class="btn-back" onclick="prevSection()">← Back</button>
+        <span class="section-counter">02 of 07</span>
+        <button type="button" class="btn-next" onclick="nextSection()">Next →</button>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 03 — YOUR BRAND ═══ -->
+    <div class="section" id="s3">
+      <div class="section-header">
+        <div class="section-label">— 03 · YOUR BRAND</div>
+        <div class="section-title">How your brand sounds and positions itself.</div>
+        <div class="section-note">Voice and positioning drive copy. The more specific, the tighter the output.</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question">
+          <label class="q-label" for="q-brand-name">Brand name (as it appears to customers) <span class="req">*</span></label>
+          <input type="text" id="q-brand-name" name="brand_name" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-voice">Describe your brand voice in exactly 3 words <span class="req">*</span></label>
+          <div class="q-hint">Example: confident, clinical, direct. Not: premium, authentic, trustworthy.</div>
+          <input type="text" id="q-voice" name="brand_voice" placeholder="e.g. confident, clinical, direct" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-admired">2 brands you admire for their tone or communication style <span class="req">*</span></label>
+          <div class="q-hint">Doesn't need to be skincare. Any brand whose communication you respect.</div>
+          <input type="text" id="q-admired" name="admired_brands" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-differentiation">What makes your brand different from every other men's skincare brand? <span class="req">*</span></label>
+          <div class="q-hint">Not "quality" or "natural ingredients." What's the actual position you hold?</div>
+          <textarea id="q-differentiation" name="differentiation" rows="4" required></textarea>
+        </div>
+
+        <div class="two-col">
+          <div class="question">
+            <label class="q-label" for="q-colors">Primary brand colors</label>
+            <div class="q-hint">Hex codes if you have them</div>
+            <input type="text" id="q-colors" name="brand_colors" placeholder="e.g. #0A0A0B, #4A7C59">
+          </div>
+          <div class="question">
+            <label class="q-label" for="q-fonts">Brand fonts</label>
+            <div class="q-hint">If known</div>
+            <input type="text" id="q-fonts" name="brand_fonts" placeholder="e.g. Cormorant, Inter">
+          </div>
+        </div>
+
+      </div>
+      <div class="nav-footer">
+        <button type="button" class="btn-back" onclick="prevSection()">← Back</button>
+        <span class="section-counter">03 of 07</span>
+        <button type="button" class="btn-next" onclick="nextSection()">Next →</button>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 04 — PRODUCTS ═══ -->
+    <div class="section" id="s4">
+      <div class="section-header">
+        <div class="section-label">— 04 · PRODUCTS</div>
+        <div class="section-title">What you sell and what to focus on.</div>
+        <div class="section-note">Shapes which products feature in flows versus campaigns.</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question">
+          <label class="q-label" for="q-products">Top 3 products to focus on in email <span class="req">*</span></label>
+          <div class="q-hint">Product name, price, and one sentence on the problem it solves.</div>
+          <textarea id="q-products" name="top_products" rows="5" required></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-exclude">Products to exclude from email</label>
+          <div class="q-hint">If any. Leave blank if not applicable.</div>
+          <textarea id="q-exclude" name="excluded_products" rows="3"></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label">Subscription / replenishment products? <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="subscription" value="Subscription is main offer" required><span>Yes — subscription is the main offer</span></label>
+            <label class="radio-option"><input type="radio" name="subscription" value="Subscription is an add-on"><span>Yes — subscription is an add-on</span></label>
+            <label class="radio-option"><input type="radio" name="subscription" value="No subscriptions"><span>No subscriptions</span></label>
+          </div>
+        </div>
+
+      </div>
+      <div class="nav-footer">
+        <button type="button" class="btn-back" onclick="prevSection()">← Back</button>
+        <span class="section-counter">04 of 07</span>
+        <button type="button" class="btn-next" onclick="nextSection()">Next →</button>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 05 — EMAIL HISTORY ═══ -->
+    <div class="section" id="s5">
+      <div class="section-header">
+        <div class="section-label">— 05 · EMAIL HISTORY</div>
+        <div class="section-title">Where your Klaviyo account is today.</div>
+        <div class="section-note">Lets me build around what exists instead of auditing blind.</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question">
+          <label class="q-label">Active Klaviyo account? <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="klaviyo_status" value="Yes, fully set up" required><span>Yes, fully set up</span></label>
+            <label class="radio-option"><input type="radio" name="klaviyo_status" value="Yes but barely used"><span>Yes but barely used</span></label>
+            <label class="radio-option"><input type="radio" name="klaviyo_status" value="No Klaviyo account yet"><span>No Klaviyo account yet</span></label>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="question">
+            <label class="q-label" for="q-list-size">Approximate total list size</label>
+            <input type="text" id="q-list-size" name="list_size" placeholder="e.g. 4,500 profiles">
+          </div>
+          <div class="question">
+            <label class="q-label" for="q-open-rate">Average open rate</label>
+            <select id="q-open-rate" name="open_rate">
+              <option value="" disabled selected>Select range</option>
+              <option>Under 20%</option>
+              <option>20–30%</option>
+              <option>30–45%</option>
+              <option>Over 45%</option>
+              <option>I don't track this</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label">Active flows in Klaviyo (check all that apply)</label>
+          <div class="check-group">
+            <label class="check-option"><input type="checkbox" name="active_flows" value="Welcome Flow"><span>Welcome Flow</span></label>
+            <label class="check-option"><input type="checkbox" name="active_flows" value="Cart Abandon Flow"><span>Cart Abandon Flow</span></label>
+            <label class="check-option"><input type="checkbox" name="active_flows" value="Checkout Abandon Flow"><span>Checkout Abandon Flow</span></label>
+            <label class="check-option"><input type="checkbox" name="active_flows" value="Browse Abandon Flow"><span>Browse Abandon Flow</span></label>
+            <label class="check-option"><input type="checkbox" name="active_flows" value="Post-Purchase Flow"><span>Post-Purchase Flow</span></label>
+            <label class="check-option"><input type="checkbox" name="active_flows" value="Winback Flow"><span>Winback / Re-engagement Flow</span></label>
+            <label class="check-option"><input type="checkbox" name="active_flows" value="None active"><span>None active</span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label">Currently running SMS? <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="sms" value="Yes, actively" required><span>Yes, actively</span></label>
+            <label class="radio-option"><input type="radio" name="sms" value="Yes but barely"><span>Yes but barely</span></label>
+            <label class="radio-option"><input type="radio" name="sms" value="No"><span>No</span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label">Worked with an email agency before? <span class="req">*</span></label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="prior_agency" value="Yes — worked well" required><span>Yes — it worked well</span></label>
+            <label class="radio-option"><input type="radio" name="prior_agency" value="Yes — didn't work well"><span>Yes — it didn't work well</span></label>
+            <label class="radio-option"><input type="radio" name="prior_agency" value="No"><span>No, first time</span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-agency-notes">If yes — what went wrong, or what did you want more of?</label>
+          <textarea id="q-agency-notes" name="prior_agency_notes" rows="3"></textarea>
+        </div>
+
+      </div>
+      <div class="nav-footer">
+        <button type="button" class="btn-back" onclick="prevSection()">← Back</button>
+        <span class="section-counter">05 of 07</span>
+        <button type="button" class="btn-next" onclick="nextSection()">Next →</button>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 06 — ASSETS ═══ -->
+    <div class="section" id="s6">
+      <div class="section-header">
+        <div class="section-label">— 06 · ASSETS</div>
+        <div class="section-title">Drop your files into the shared folder.</div>
+        <div class="section-note">Upload what you have. If you don't have something, skip it — I'll work with what's available.</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question">
+          <div class="drive-box">
+            <div class="drive-box-icon">📁</div>
+            <p>Upload your logo, product photos, brand guide, and any email examples you like into the shared Google Drive folder below. Name the folder with your brand name.</p>
+            <a href="https://drive.google.com/drive/folders/1fxBOEE3tZqY7Eu-w_rbfbUWqZO2AkZIo" target="_blank" rel="noopener">Open shared folder →</a>
+          </div>
+        </div>
+
+        <div class="q-divider"></div>
+
+        <div class="question">
+          <label class="q-label">Do you have a brand style guide?</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="style_guide" value="Yes — uploaded to Drive"><span>Yes — I'll upload it to the folder</span></label>
+            <label class="radio-option"><input type="radio" name="style_guide" value="No formal guide"><span>No formal guide</span></label>
+            <label class="radio-option"><input type="radio" name="style_guide" value="It's all in my head"><span>It's all in my head</span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-drive-confirm">Confirm what you've uploaded (or will upload)</label>
+          <div class="q-hint">e.g. "Logo PNG, 4 product photos, no style guide"</div>
+          <input type="text" id="q-drive-confirm" name="assets_uploaded" placeholder="e.g. Logo + 4 product photos">
+        </div>
+
+      </div>
+      <div class="nav-footer">
+        <button type="button" class="btn-back" onclick="prevSection()">← Back</button>
+        <span class="section-counter">06 of 07</span>
+        <button type="button" class="btn-next" onclick="nextSection()">Next →</button>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 07 — GOALS ═══ -->
+    <div class="section" id="s7">
+      <div class="section-header">
+        <div class="section-label">— 07 · GOALS</div>
+        <div class="section-title">What success looks like for you.</div>
+        <div class="section-note">Last section. Two questions. Then you're done.</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question">
+          <label class="q-label" for="q-success">What does success look like 90 days from now? <span class="req">*</span></label>
+          <div class="q-hint">A number, a percentage, a customer behavior — be specific.</div>
+          <textarea id="q-success" name="success_definition" rows="4" required></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label" for="q-notes">Anything else I should know before Day 1?</label>
+          <div class="q-hint">Upcoming launches, seasonal context, anything that affects the first month.</div>
+          <textarea id="q-notes" name="extra_notes" rows="4"></textarea>
+        </div>
+
+      </div>
+      <div class="nav-footer">
+        <button type="button" class="btn-back" onclick="prevSection()">← Back</button>
+        <span class="section-counter">07 of 07</span>
+        <button type="button" class="btn-next" id="submit-btn" onclick="submitForm()">Submit →</button>
+      </div>
+    </div>
+
+  </form><!-- /form -->
+
+  <!-- ═══ SUCCESS SCREEN ═══ -->
+  <div id="success-screen">
+    <div class="success-label">Intake Complete</div>
+    <h1>Done.</h1>
+    <p>I'll review everything before Day 1 and confirm via Slack. If anything's missing or unclear, I'll reach out directly.</p>
+    <a href="https://yusef.info/onboarding">← Back to Onboarding</a>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<script>
+  const TOTAL_SECTIONS = 7;
+  let current = 1;
+
+  function getSection(n) {
+    return document.getElementById('s' + n);
+  }
+
+  function showSection(n) {
+    const prev = getSection(current);
+    prev.classList.remove('visible');
+    setTimeout(() => {
+      prev.classList.remove('active');
+      current = n;
+      const next = getSection(current);
+      next.classList.add('active');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => next.classList.add('visible'));
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateMeta();
+    }, 150);
+  }
+
+  function nextSection() {
+    if (!validateSection(current)) return;
+    if (current < TOTAL_SECTIONS) showSection(current + 1);
+  }
+
+  function prevSection() {
+    if (current > 1) showSection(current - 1);
+  }
+
+  function updateMeta() {
+    const pct = (current / TOTAL_SECTIONS) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('topbar-step').textContent =
+      'Section ' + String(current).padStart(2,'0') + ' of ' + String(TOTAL_SECTIONS).padStart(2,'0');
+  }
+
+  function validateSection(n) {
+    const section = getSection(n);
+    const required = section.querySelectorAll('[required]');
+    let valid = true;
+    required.forEach(el => {
+      if (el.type === 'radio') {
+        const group = section.querySelectorAll(`[name="${el.name}"]`);
+        const checked = Array.from(group).some(r => r.checked);
+        if (!checked) { valid = false; el.closest('.radio-group').style.outline = '2px solid #B84040'; }
+        else { el.closest('.radio-group').style.outline = ''; }
+      } else {
+        if (!el.value.trim()) {
+          valid = false;
+          el.style.borderColor = '#B84040';
+        } else {
+          el.style.borderColor = '';
+        }
+      }
+    });
+    if (!valid) {
+      section.querySelector('[required]')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    return valid;
+  }
+
+  async function submitForm() {
+    if (!validateSection(current)) return;
+
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const form = document.getElementById('intake-form');
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        getSection(current).classList.remove('active', 'visible');
+        document.getElementById('success-screen').style.display = 'flex';
+        document.getElementById('progress-fill').style.width = '100%';
+        document.getElementById('topbar-step').textContent = 'Complete';
+      } else {
+        btn.textContent = 'Error — try again';
+        btn.disabled = false;
+      }
+    } catch (e) {
+      btn.textContent = 'Error — try again';
+      btn.disabled = false;
+    }
+  }
+
+  // Init
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => getSection(1).classList.add('visible'));
+  });
+  updateMeta();
+</script>
+</body>
+</html>

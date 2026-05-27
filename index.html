@@ -54,6 +54,9 @@
   <!-- Skip link -->
   <a href="#main" class="skip-link">Skip to main content</a>
 
+  <!-- Gold cursor glow (desktop only) -->
+  <div id="cursor-glow" aria-hidden="true"></div>
+
   <!-- Header / Nav -->
   <header class="site-header">
     <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
@@ -359,11 +362,97 @@
     <div class="section-divider"></div>
 
     <!-- =========================
+         SECTION — THE MATH (ROI CALCULATOR)
+         ========================= -->
+    <section id="math" class="section">
+      <div class="max-w-[1280px] mx-auto px-6 md:px-12">
+        <p class="section-label">— 05 · THE MATH</p>
+        <h2 class="section-headline"><em>What this actually returns.</em></h2>
+        <p class="prose-intro">
+          Industry-leading DTC email programs drive 30% of total store revenue. Most brands sit
+          between 5% and 15%. The gap is the opportunity. Move the sliders to see your numbers.
+        </p>
+
+        <div class="roi">
+          <div class="roi-inputs">
+            <div class="roi-field">
+              <div class="roi-field-head">
+                <label class="roi-label" for="roiRevenue">Monthly store revenue</label>
+                <span class="roi-input-value" id="roiRevenueVal"><em>$75,000</em></span>
+              </div>
+              <input type="range" id="roiRevenue" min="30000" max="500000" step="5000" value="75000" />
+            </div>
+
+            <div class="roi-field">
+              <div class="roi-field-head">
+                <label class="roi-label" for="roiPct">Current email-attributed revenue</label>
+                <span class="roi-input-value" id="roiPctVal"><em>8%</em></span>
+              </div>
+              <input type="range" id="roiPct" min="0" max="40" step="1" value="8" />
+              <p class="roi-helper">If you don't know — Klaviyo dashboard, last 30 days. If you have nothing set up, leave at 5%.</p>
+            </div>
+          </div>
+
+          <div class="roi-outputs" id="roiOutputs">
+            <div class="roi-out">
+              <p class="output-label">Current monthly email revenue</p>
+              <p class="output-value" id="outCurrent">$6,000</p>
+            </div>
+            <div class="roi-out">
+              <p class="output-label">Projected monthly email revenue</p>
+              <p class="output-value" id="outProjected">$22,500</p>
+            </div>
+            <div class="roi-out">
+              <p class="output-label">Monthly uplift opportunity</p>
+              <p class="output-value highlight" id="outUplift">$16,500</p>
+            </div>
+            <div class="roi-out-row">
+              <div class="roi-out">
+                <p class="output-label">Your monthly retainer</p>
+                <p class="output-value sm" id="outRetainer">$2,500</p>
+              </div>
+              <div class="roi-out">
+                <p class="output-label">Net monthly gain</p>
+                <p class="output-value sm" id="outNet">$14,000</p>
+              </div>
+            </div>
+            <div class="roi-out-row">
+              <div class="roi-out">
+                <p class="output-label">ROI multiple</p>
+                <p class="output-value sm" id="outRoi">6.6×</p>
+              </div>
+              <div class="roi-out">
+                <p class="output-label">Annual uplift estimate</p>
+                <p class="output-value sm" id="outAnnual">$185,625</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- edge-case message replaces outputs when relevant -->
+          <div class="roi-message" id="roiMessage" hidden>
+            <p id="roiMessageText"></p>
+          </div>
+        </div>
+
+        <div class="roi-footer">
+          <p class="roi-footnote">
+            Projections based on Klaviyo / industry-leading DTC benchmarks. Programs typically
+            reach steady-state at 60–90 days. Past results don't guarantee specific outcomes —
+            your product, market, and offer matter.
+          </p>
+          <a href="https://calendly.com/yusef-cliyra/15min" class="btn-primary" target="_blank" rel="noopener">Book A 15-Min Discovery Call</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- =========================
          SECTION 6 — PROCESS
          ========================= -->
     <section id="process" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
-        <p class="section-label">— 05 · HOW IT WORKS</p>
+        <p class="section-label">— 06 · HOW IT WORKS</p>
         <h2 class="section-headline"><em>From signed to live in seven days.</em></h2>
 
         <ol class="timeline">
@@ -413,7 +502,7 @@
          ========================= -->
     <section id="selection" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
-        <p class="section-label">— 06 · SELECTION</p>
+        <p class="section-label">— 07 · SELECTION</p>
         <h2 class="section-headline"><em>Who I take on.</em></h2>
         <p class="prose-intro">
           I work with men's skincare brands — and only men's skincare brands. Below is exactly
@@ -455,7 +544,7 @@
          ========================= -->
     <section id="about" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
-        <p class="section-label">— 07 · ABOUT</p>
+        <p class="section-label">— 08 · ABOUT</p>
         <h2 class="section-headline"><em>Why I do this.</em></h2>
         <div class="prose-block">
           <p>
@@ -486,7 +575,7 @@
          ========================= -->
     <section id="faq" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
-        <p class="section-label">— 08 · COMMON QUESTIONS</p>
+        <p class="section-label">— 09 · COMMON QUESTIONS</p>
         <h2 class="section-headline"><em>What people ask.</em></h2>
 
         <div class="faq-list mt-16">
@@ -570,7 +659,7 @@
          ========================= -->
     <section id="contact" class="section section-cta">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12 text-center">
-        <p class="section-label justify-center">— 09 · NEXT</p>
+        <p class="section-label justify-center">— 10 · NEXT</p>
         <h2 class="section-headline section-headline-cta">
           <em>If your brand is <span class="gold-underline">ready.</span></em>
         </h2>

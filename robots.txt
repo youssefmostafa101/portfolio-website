@@ -2,7 +2,10 @@ User-agent: *
 Allow: /
 Allow: /index.html
 Disallow: /onboarding.html
+Disallow: /onboarding
+Disallow: /intake.html
 Disallow: /admin.html
 Disallow: /availability.json
+Disallow: /assets/onboarding/
 
 Sitemap: https://yusef.info/sitemap.xml
