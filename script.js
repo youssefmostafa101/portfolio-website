@@ -285,4 +285,117 @@
     }
   }
 
+  // ============================================
+  // Gold cursor glow (Add-on A) — desktop only
+  // ============================================
+  const glow = document.getElementById('cursor-glow');
+  if (glow && !prefersReducedMotion && window.matchMedia('(min-width: 769px)').matches) {
+    let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0, running = true;
+    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+    (function animateGlow() {
+      glowX += (mouseX - glowX) * 0.15;
+      glowY += (mouseY - glowY) * 0.15;
+      glow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
+      if (running) requestAnimationFrame(animateGlow);
+    })();
+    document.addEventListener('touchstart', () => { running = false; glow.style.display = 'none'; }, { once: true });
+  }
+
+  // ============================================
+  // ROI Calculator (Add-on B) — THE MATH
+  // ============================================
+  const roiRevenue = document.getElementById('roiRevenue');
+  const roiPct = document.getElementById('roiPct');
+  if (roiRevenue && roiPct) {
+    const TARGET = 0.30;
+    const outputs = document.getElementById('roiOutputs');
+    const message = document.getElementById('roiMessage');
+    const messageText = document.getElementById('roiMessageText');
+
+    const els = {
+      revenueVal: document.getElementById('roiRevenueVal'),
+      pctVal: document.getElementById('roiPctVal'),
+      current: document.getElementById('outCurrent'),
+      projected: document.getElementById('outProjected'),
+      uplift: document.getElementById('outUplift'),
+      retainer: document.getElementById('outRetainer'),
+      net: document.getElementById('outNet'),
+      roi: document.getElementById('outRoi'),
+      annual: document.getElementById('outAnnual'),
+    };
+
+    // track last numeric value per element for the count animation
+    const last = {};
+
+    function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+
+    function animateNumber(el, key, end, suffix, duration = 200) {
+      const start = typeof last[key] === 'number' ? last[key] : end;
+      last[key] = end;
+      const startTime = performance.now();
+      function step(now) {
+        const p = Math.min((now - startTime) / duration, 1);
+        const val = start + (end - start) * p;
+        el.textContent = suffix === 'x' ? (val.toFixed(1) + '×') : fmt(val);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function retainerFor(rev) {
+      if (rev <= 50000) return 1500;
+      if (rev <= 100000) return 2500;
+      if (rev <= 150000) return 3500;
+      return 4500;
+    }
+
+    function showMessage(text) {
+      if (outputs) outputs.style.display = 'none';
+      if (message && messageText) { messageText.textContent = text; message.removeAttribute('hidden'); }
+    }
+    function showOutputs() {
+      if (outputs) outputs.style.display = '';
+      if (message) message.setAttribute('hidden', '');
+    }
+
+    function update() {
+      const revenue = parseInt(roiRevenue.value, 10);
+      const pct = parseInt(roiPct.value, 10) / 100;
+
+      els.revenueVal.innerHTML = '<em>' + fmt(revenue) + '</em>';
+      els.pctVal.innerHTML = '<em>' + Math.round(pct * 100) + '%</em>';
+
+      // edge cases
+      if (revenue < 30000) {
+        showMessage('Below the typical tier. Book a call to discuss whether the engagement makes sense for your stage.');
+        return;
+      }
+      const currentRev = revenue * pct;
+      const projectedRev = revenue * TARGET;
+      const uplift = projectedRev - currentRev;
+      if (pct >= TARGET || uplift <= 0) {
+        showMessage("You're already running email well. The opportunity here is optimization, not building from scratch. Book a call to discuss a custom scope.");
+        return;
+      }
+      showOutputs();
+
+      const retainer = retainerFor(revenue);
+      const net = uplift - retainer;
+      const roi = uplift / retainer;
+      const annual = uplift * 11.25;
+
+      animateNumber(els.current, 'current', currentRev);
+      animateNumber(els.projected, 'projected', projectedRev);
+      animateNumber(els.uplift, 'uplift', uplift);
+      animateNumber(els.retainer, 'retainer', retainer);
+      animateNumber(els.net, 'net', net);
+      animateNumber(els.roi, 'roi', roi, 'x');
+      animateNumber(els.annual, 'annual', annual);
+    }
+
+    roiRevenue.addEventListener('input', update);
+    roiPct.addEventListener('input', update);
+    update();
+  }
+
 })();
