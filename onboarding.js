@@ -117,17 +117,11 @@
 
   function renderWidget(config) {
     const available = isAvailable(config);
-    const visitorTz = getVisitorTimezone();
-    const visitorLabel = getVisitorCityLabel(visitorTz);
 
     const dot = document.getElementById('statusDot');
     const text = document.getElementById('statusText');
-    const myHours = document.getElementById('myHours');
-    const yourHours = document.getElementById('yourHours');
-    const backOnlineRow = document.getElementById('backOnlineRow');
-    const backOnline = document.getElementById('backOnline');
 
-    // Header chip
+    // Header chip (kept for back-compat; hidden in current layout)
     const chip = document.getElementById('availabilityChip');
     if (chip) {
       chip.classList.remove('available', 'unavailable');
@@ -136,46 +130,26 @@
       if (chipText) chipText.textContent = available ? 'Available now' : 'Unavailable';
     }
 
-    if (!dot || !text || !myHours || !yourHours) return;
-
-    // Get today's start and end instants
-    const startInstant = getInstantForLocalHour(config.timezone, config.startHour);
-    const endInstant = getInstantForLocalHour(config.timezone, config.endHour);
-
-    // For "my hours" we want the local-time labels (Cairo: 6:00 AM – 4:00 PM)
-    // Use one consistent date by formatting any instant whose Cairo time == startHour.
-    const myStartLabel = formatTimeInTimezone(startInstant, config.timezone);
-    const myEndLabel = formatTimeInTimezone(endInstant, config.timezone);
-    myHours.textContent = `${myStartLabel} – ${myEndLabel} (${config.locationLabel})`;
-
-    // Visitor-local equivalents
-    const yourStartLabel = formatTimeInTimezone(startInstant, visitorTz);
-    const yourEndLabel = formatTimeInTimezone(endInstant, visitorTz);
-    yourHours.textContent = `${yourStartLabel} – ${yourEndLabel} (${visitorLabel})`;
-
-    if (available) {
-      dot.classList.remove('red');
-      dot.classList.add('green');
-      text.textContent = 'Available now';
-      if (backOnlineRow) backOnlineRow.setAttribute('hidden', '');
-    } else {
-      dot.classList.remove('green');
-      dot.classList.add('red');
-      text.textContent = 'Unavailable';
-      // Show "Back online at X your time"
-      if (backOnlineRow && backOnline) {
-        const myStart = formatTimeInTimezone(startInstant, config.timezone);
-        const yourStart = formatTimeInTimezone(startInstant, visitorTz);
-        backOnline.textContent = `${myStart} (${config.locationLabel}) · ${yourStart} (${visitorLabel})`;
-        backOnlineRow.removeAttribute('hidden');
+    if (dot && text) {
+      if (available) {
+        dot.classList.remove('red'); dot.classList.add('green');
+        text.textContent = 'Available now';
+      } else {
+        dot.classList.remove('green'); dot.classList.add('red');
+        text.textContent = 'Unavailable';
       }
     }
 
-    // Also update the inline "I work every day from X to Y" sentence.
+    // Optional inline spans (not present in current layout, kept as a hook
+    // in case the working-hours text is ever turned dynamic again).
     const hoursStart = document.getElementById('hoursStart');
     const hoursEnd = document.getElementById('hoursEnd');
-    if (hoursStart) hoursStart.textContent = myStartLabel;
-    if (hoursEnd) hoursEnd.textContent = myEndLabel;
+    if (hoursStart || hoursEnd) {
+      const startInstant = getInstantForLocalHour(config.timezone, config.startHour);
+      const endInstant = getInstantForLocalHour(config.timezone, config.endHour);
+      if (hoursStart) hoursStart.textContent = formatTimeInTimezone(startInstant, config.timezone);
+      if (hoursEnd) hoursEnd.textContent = formatTimeInTimezone(endInstant, config.timezone);
+    }
   }
 
   // ============================================
