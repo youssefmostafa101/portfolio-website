@@ -60,7 +60,11 @@
   <!-- Header / Nav -->
   <header class="site-header">
     <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
-      <a href="#hero" class="font-mono text-sm tracking-wider text-text-primary hover:text-accent transition-colors">YUSEF</a>
+      <a href="#hero" class="site-logo" aria-label="Yusef — home">
+        <svg viewBox="0 0 64 64" width="32" height="32" aria-hidden="true">
+          <path d="M14 16 L32 38 L32 50 M50 16 L32 38" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </a>
       <nav aria-label="Primary" class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest">
         <a href="#system" class="text-text-secondary hover:text-text-primary transition-colors">System</a>
         <a href="#work" class="text-text-secondary hover:text-text-primary transition-colors">Work</a>
@@ -419,8 +423,8 @@
         <p class="section-label">— 06 · SELECTION</p>
         <h2 class="section-headline"><em>Who I take on.</em></h2>
         <p class="prose-intro">
-          I work with men's skincare brands — and only men's skincare brands. Below is exactly
-          who the system is built for.
+          Outreach focuses on men's skincare — but the system works for any qualified DTC brand
+          that fits the profile below.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-16">
@@ -428,7 +432,7 @@
             <p class="mono-label">WHO I BUILD FOR</p>
             <h3 class="selection-headline"><em>The fit.</em></h3>
             <ul class="check-list">
-              <li><span class="check-mark" aria-hidden="true">✓</span> DTC men's skincare brands on Shopify</li>
+              <li><span class="check-mark" aria-hidden="true">✓</span> DTC brands</li>
               <li><span class="check-mark" aria-hidden="true">✓</span> Doing $30K+/month minimum revenue</li>
               <li><span class="check-mark" aria-hidden="true">✓</span> Brand owners who treat email as a real channel — not an afterthought</li>
               <li><span class="check-mark" aria-hidden="true">✓</span> Founders ready to commit to a 90-day system build</li>
@@ -439,10 +443,7 @@
             <p class="mono-label">WHO I DON'T</p>
             <h3 class="selection-headline"><em>The mismatch.</em></h3>
             <ul class="cross-list">
-              <li><span class="cross-mark" aria-hidden="true">×</span> Sub-$30K/month brands (too early for what I deliver)</li>
-              <li><span class="cross-mark" aria-hidden="true">×</span> Brands outside men's skincare</li>
-              <li><span class="cross-mark" aria-hidden="true">×</span> Brands chasing growth hacks or quick wins</li>
-              <li><span class="cross-mark" aria-hidden="true">×</span> Brands with no patience for systematic work</li>
+              <li><span class="cross-mark" aria-hidden="true">×</span> Sub-$30K/month brands — too early for what I deliver</li>
               <li><span class="cross-mark" aria-hidden="true">×</span> Anyone who wants 50 emails a month</li>
             </ul>
           </div>
@@ -524,22 +525,12 @@
           </div>
 
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
-              <span>What does the engagement look like?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div id="faq-4" class="faq-answer" hidden>
-              <p>$2K/month base + revenue share. 90-day initial commitment, then month-to-month. We connect weekly via Loom + Slack. No status calls — the work is the report.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
             <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
               <span>Why should I trust you?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div id="faq-5" class="faq-answer" hidden>
-              <p>Fair question. The answer is the work — see Section 04. Judge the system by what ships. If the emails I'm putting out aren't the level you want in your customers' inboxes, the conversation ends there.</p>
+              <p>Fair question. The clearest answer is the work itself. The emails in Section 04 above are from <a href="https://cliyra.com" target="_blank" rel="noopener" class="text-link">CLiYRA</a> — my own men's skincare brand — running on the same system I'd build for yours. Same pipeline, same standard, every send. Scroll up, look at what ships, and decide.</p>
             </div>
           </div>
 
@@ -586,6 +577,15 @@
           <p class="contact-secondary">Or email: <a href="mailto:yusef@cliyra.com" class="text-link">yusef@cliyra.com</a></p>
           <p class="contact-secondary">Or WhatsApp: <a href="https://wa.me/201065042688" class="text-link" target="_blank" rel="noopener">+20 106 504 2688</a></p>
         </div>
+
+        <div class="ig-follow">
+          <p class="mono-label justify-center">FOLLOW ALONG</p>
+          <a href="https://www.instagram.com/yusef_moustfa/" target="_blank" rel="noopener" class="ig-follow-card" aria-label="Follow @yusef_moustfa on Instagram">
+            <img src="assets/ig-qr.svg" alt="" width="120" height="120" loading="lazy" />
+            <span class="ig-handle">@yusef_moustfa</span>
+            <span class="ig-cta">Open in Instagram <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
       </div>
     </section>
   </main>
@@ -596,7 +596,11 @@
   <footer class="site-footer">
     <div class="max-w-[1280px] mx-auto px-6 md:px-12">
       <div class="footer-row">
-        <a href="#hero" class="footer-logo">YUSEF</a>
+        <a href="#hero" class="site-logo footer-logo" aria-label="Back to top">
+          <svg viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+            <path d="M14 16 L32 38 L32 50 M50 16 L32 38" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </a>
         <nav aria-label="Footer" class="footer-nav">
           <a href="#system">System</a>
           <a href="#work">Work</a>
@@ -608,7 +612,7 @@
       <div class="footer-row footer-row-bottom">
         <p class="footer-copy">© 2026 YUSEF. ALL RIGHTS RESERVED.</p>
         <div class="footer-social">
-          <a href="#" aria-label="Instagram">INSTAGRAM</a>
+          <a href="https://www.instagram.com/yusef_moustfa/" target="_blank" rel="noopener" aria-label="Instagram @yusef_moustfa">INSTAGRAM</a>
         </div>
       </div>
     </div>

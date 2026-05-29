@@ -1396,3 +1396,65 @@ body:hover #cursor-glow { opacity: 1; }
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 .signature-link:hover { color: var(--accent-hover); border-bottom-color: var(--accent); }
+
+/* ── SITE LOGO MARK (gold Y) ── */
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  transition: color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+.site-logo:hover { color: var(--accent-hover); transform: scale(1.04); }
+.site-logo svg { display: block; }
+
+/* ── INSTAGRAM FOLLOW CARD ── */
+.ig-follow {
+  margin-top: 80px;
+  padding-top: 56px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.ig-follow-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 18px 22px;
+  background: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.2s ease;
+}
+.ig-follow-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 20px 50px -20px rgba(201, 155, 94, 0.25);
+}
+.ig-follow-card img {
+  width: 132px;
+  height: 132px;
+  display: block;
+  border-radius: 4px;
+}
+.ig-handle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bg-primary);
+  margin-top: 2px;
+}
+.ig-cta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.ig-follow-card:hover .ig-cta { color: var(--accent); }
