@@ -435,3 +435,18 @@
 .slack-cta svg { flex-shrink: 0; }
 .slack-cta-arrow { font-size: 16px; line-height: 1; transition: transform 0.2s ease; }
 .slack-cta:hover .slack-cta-arrow { transform: translateX(2px); }
+
+/* ── Onboarding header logo ── */
+.onb-logo { gap: 12px; }
+.onb-logo-suffix {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  display: inline-block;
+}
+@media (max-width: 480px) {
+  .onb-logo-suffix { display: none; }
+}
