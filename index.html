@@ -676,43 +676,98 @@
     <p class="lb-caption" id="lbCaption"></p>
   </div>
 
-  <!-- ==========================================
+<!-- ==========================================
        LEAD MAGNET — floating button
        ========================================== -->
-  <button type="button" id="leadFab" class="lead-fab" aria-haspopup="dialog" aria-controls="leadModal">
-    <span class="lead-fab-full">FREE · THE EMAIL DESIGN SYSTEM <span class="lead-fab-arrow" aria-hidden="true">→</span></span>
-    <span class="lead-fab-icon" aria-hidden="true">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4v12M6 12l6 6 6-6"/><line x1="5" y1="20" x2="19" y2="20"/></svg>
+  <button type="button" id="leadFab" class="fixed bottom-6 right-6 z-40 bg-surface border border-border-subtle hover:border-accent shadow-2xl px-5 py-3 rounded-full flex items-center gap-3 transition-all duration-300 group cursor-pointer" aria-haspopup="dialog" aria-controls="leadModal">
+    <span class="font-mono text-[10px] tracking-widest uppercase text-text-primary">
+      FREE · THE EMAIL DESIGN SYSTEM 
+      <span class="text-accent group-hover:translate-x-1 inline-block transition-transform duration-300" aria-hidden="true">→</span>
+    </span>
+    <span class="text-accent" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 4v12M6 12l6 6 6-6"/>
+        <line x1="5" y1="20" x2="19" y2="20"/>
+      </svg>
     </span>
   </button>
 
   <!-- ==========================================
        LEAD MAGNET — modal
        ========================================== -->
-  <div id="leadModal" class="lead-modal" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle" hidden>
-    <div class="lead-modal-backdrop" data-lead-close></div>
-    <div class="lead-modal-panel">
-      <button type="button" class="lead-modal-close" data-lead-close aria-label="Close">
+  <div id="leadModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-primary/90 backdrop-blur-sm hidden" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
+    
+    <!-- Backdrop (Clicking this closes the modal) -->
+    <div class="absolute inset-0 cursor-pointer" data-lead-close></div>
+    
+    <!-- Modal Panel -->
+    <div class="relative bg-surface border border-border-subtle p-8 md:p-10 max-w-lg w-full shadow-2xl">
+      
+      <!-- Close X -->
+      <button type="button" class="absolute top-4 right-4 text-text-secondary hover:text-text-primary transition-colors p-2" data-lead-close aria-label="Close">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
           <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
         </svg>
       </button>
-      <p class="lead-top-label">FREE · NO OPT-IN · NO LIST</p>
-      <h2 id="leadModalTitle" class="lead-headline"><em>The Email Design System.</em></h2>
-      <p class="lead-subhead">
-        The exact framework I use to run email for DTC brands. Build a brand-locked
-        email engine in Claude in about 90 minutes. Same system I run on every client engagement.
+      
+      <p class="font-mono text-[10px] tracking-widest uppercase text-accent mb-4">FREE · NO OPT-IN · NO LIST</p>
+      <h2 id="leadModalTitle" class="font-serif text-3xl md:text-4xl text-text-primary mb-4 tracking-tight">
+        <em>The Email Design System.</em>
+      </h2>
+      <p class="text-text-secondary text-sm md:text-base leading-relaxed mb-6">
+        The exact framework I use to run email for DTC brands. Build a brand-locked email engine in Claude in about 90 minutes. Same system I run on every client engagement.
       </p>
-      <ul class="lead-bullets">
-        <li>The five-layer framework</li>
-        <li>The master prompt (copy-paste ready)</li>
-        <li>A worked example, end to end</li>
+      
+      <ul class="text-sm md:text-base text-text-primary space-y-3 mb-8">
+        <li class="flex items-center gap-3"><span class="text-accent">✓</span> The five-layer framework</li>
+        <li class="flex items-center gap-3"><span class="text-accent">✓</span> The master prompt (copy-paste ready)</li>
+        <li class="flex items-center gap-3"><span class="text-accent">✓</span> A worked example, end to end</li>
       </ul>
-      <a href="assets/the-email-design-system.pdf" id="leadDownload" class="lead-cta" download>Download the PDF →</a>
-      <button type="button" class="lead-dismiss" data-lead-close>No thanks, close</button>
+      
+      <a href="assets/the-email-design-system.pdf" id="leadDownload" class="btn-primary w-full text-center flex justify-center items-center mb-5" download>
+        Download the PDF →
+      </a>
+      
+      <button type="button" class="w-full text-center text-[10px] font-mono text-text-secondary hover:text-text-primary transition-colors uppercase tracking-widest" data-lead-close>
+        No thanks, close
+      </button>
     </div>
   </div>
 
+  <!-- External Script -->
   <script src="script.js"></script>
+
+  <!-- Hardcoded logic for the Lead Magnet to guarantee it fires -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fab = document.getElementById('leadFab');
+      const modal = document.getElementById('leadModal');
+      const closeTriggers = document.querySelectorAll('[data-lead-close]');
+
+      if (fab && modal) {
+        // Open the modal and lock background scrolling
+        fab.addEventListener('click', () => {
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden'; 
+        });
+
+        // Close the modal and restore background scrolling
+        closeTriggers.forEach(trigger => {
+          trigger.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; 
+          });
+        });
+
+        // Allow closing with the Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
