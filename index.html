@@ -3,25 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Yusef — Email Marketing & Retention for DTC Brands</title>
-<meta property="og:title" content="Yusef — Email Marketing & Retention for DTC Brands">
-<meta name="description" content="High-performance lifecycle marketing and retention systems for Direct-to-Consumer brands.">
+  <title>Yusef — Email Marketing & Retention for DTC Brands</title>
+  <meta property="og:title" content="Yusef — Email Marketing & Retention for DTC Brands">
+  <meta name="description" content="High-performance lifecycle marketing and retention systems for Direct-to-Consumer brands.">
   <meta property="og:description" content="Complete email + SMS retention systems built specifically for DTC brands." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://yusef.info" />
   <meta name="theme-color" content="#0A0A0B" />
   <link rel="canonical" href="https://yusef.info/" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="apple-touch-icon" href="assets/favicon.svg" />
 
-  <!-- Preconnect for font performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -51,13 +48,10 @@
 </head>
 <body class="bg-bg-primary text-text-primary font-sans antialiased">
 
-  <!-- Skip link -->
   <a href="#main" class="skip-link">Skip to main content</a>
 
-  <!-- Gold cursor glow (desktop only) -->
   <div id="cursor-glow" aria-hidden="true"></div>
 
-  <!-- Header / Nav -->
   <header class="site-header">
     <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
       <a href="#hero" class="site-logo" aria-label="Yusef — home">
@@ -91,9 +85,6 @@
 
   <main id="main">
 
-    <!-- =========================
-         SECTION 1 — HERO
-         ========================= -->
     <section id="hero" class="hero-section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12 text-center">
         <p class="mono-label mb-12 md:mb-16">EMAIL MARKETING · DTC Brands</p>
@@ -109,7 +100,7 @@
 
         <div class="hero-ctas">
           <a href="#contact" class="btn-primary">Book A 15-Min Discovery Call</a>
-          <a href="#system" class="btn-ghost">See The System</a>
+          <button type="button" onclick="openRetentionModal()" class="btn-ghost">Download Playbook</button>
         </div>
 
         <div class="scroll-cue" aria-hidden="true">
@@ -121,9 +112,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- =========================
-         SECTION 2 — THE PROBLEM & POSITION
-         ========================= -->
     <section id="problem" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
         <p class="section-label">— 01 · THE PROBLEM</p>
@@ -149,9 +137,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- =========================
-         SECTION 3 — SERVICES
-         ========================= -->
     <section id="services" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
         <p class="section-label">— 02 · WHAT I BUILD</p>
@@ -189,9 +174,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- =========================
-         SECTION 4 — THE SYSTEM
-         ========================= -->
     <section id="system" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
         <p class="section-label">— 03 · THE SYSTEM</p>
@@ -255,9 +237,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- =========================
-         SECTION 5 — RECENT WORK
-         ========================= -->
     <section id="work" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
         <p class="section-label">— 04 · RECENT WORK</p>
@@ -267,7 +246,6 @@
           System pipeline. Click any email to open it full-size.
         </p>
 
-        <!-- Brand Group 1 — CLiYRA -->
         <div class="brand-group">
           <div class="brand-header">
             <h3 class="brand-name"><em>CLiYRA</em></h3>
@@ -299,7 +277,6 @@
           </p>
         </div>
 
-        <!-- Brand Group 2 — Lab Series -->
         <div class="brand-group">
           <div class="brand-header">
             <h3 class="brand-name"><em>Lab Series</em></h3>
@@ -330,7 +307,6 @@
           </p>
         </div>
 
-        <!-- Brand Group 3 — Brickell -->
         <div class="brand-group">
           <div class="brand-header">
             <h3 class="brand-name"><em>Brickell</em></h3>
@@ -354,14 +330,13 @@
               <figcaption class="work-email-caption">BRICKELL · CAMPAIGN · OBJECTION KILLER</figcaption>
             </figure>
           </div>
-          <p class="brand-narrative">
+          <p class="brickell natural-positioning brand">
             Prototype run on Brickell's natural-positioning brand. A cart-recovery email and an
             objection-killer campaign, both built around the buying-objection framework. Both
             shipped from the same Design System file in under thirty minutes each.
           </p>
         </div>
         
-        <!-- Brand Group 4 — Graza -->
         <div class="brand-group">
           <div class="brand-header">
             <h3 class="brand-name"><em>Graza</em></h3>
@@ -390,8 +365,7 @@
           </p>
         </div>
 
-         <!-- Brand Group 5 — Fable -->
-        <div class="brand-group">
+         <div class="brand-group">
           <div class="brand-header">
             <h3 class="brand-name"><em>Fable Pets</em></h3>
             <div class="pill-row">
@@ -416,9 +390,6 @@
     </section>
 
     <div class="section-divider"></div>
-    <!-- =========================
-         SECTION 6 — PROCESS
-         ========================= -->
     <section id="process" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
         <p class="section-label">— 05 · HOW IT WORKS</p>
@@ -466,9 +437,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- =========================
-         SECTION 7 — SELECTION
-         ========================= -->
     <section id="selection" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
         <p class="section-label">— 06 · SELECTION</p>
@@ -507,9 +475,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- =========================
-         SECTION 8 — ABOUT
-         ========================= -->
     <section id="about" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
         <p class="section-label">— 07 · ABOUT</p>
@@ -538,9 +503,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- =========================
-         SECTION 9 — FAQ
-         ========================= -->
     <section id="faq" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
         <p class="section-label">— 08 · COMMON QUESTIONS</p>
@@ -612,9 +574,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- =========================
-         SECTION 10 — FINAL CTA
-         ========================= -->
     <section id="contact" class="section section-cta">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12 text-center">
         
@@ -628,10 +587,8 @@
           Choose the engagement model that aligns with your brand's current infrastructure and revenue scale.
         </p>
 
-        <!-- Two Column Card Layout -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-16 max-w-5xl mx-auto text-left">
             
-          <!-- CARD 1: THE HIGH-TICKET RETAINER -->
           <div class="bg-surface border border-border-subtle p-8 md:p-12 flex flex-col justify-between transition-colors duration-300 hover:border-accent group">
             <div>
               <span class="font-mono text-xs uppercase tracking-widest text-text-secondary block mb-5 group-hover:text-accent transition-colors">
@@ -649,7 +606,6 @@
             </a>
           </div>
 
-          <!-- CARD 2: THE FIXED-PRICE UPWORK SPRINT -->
           <div class="bg-surface border border-border-subtle p-8 md:p-12 flex flex-col justify-between transition-colors duration-300 hover:border-text-secondary group">
             <div>
               <span class="font-mono text-xs uppercase tracking-widest text-text-secondary block mb-5 group-hover:text-text-primary transition-colors">
@@ -669,7 +625,6 @@
 
         </div>
 
-        <!-- LINKEDIN SOCIAL AUTHORITY ELEMENT -->
         <div class="mt-20 pt-8 border-t border-border-subtle inline-block">
           <a href="https://www.linkedin.com/in/yusef-mostafa-" target="_blank" rel="noopener noreferrer" class="font-mono text-xs uppercase tracking-widest text-text-secondary hover:text-accent transition-colors flex items-center gap-2">
             <span class="underline underline-offset-4 decoration-border-subtle hover:decoration-accent transition-colors">Connect on LinkedIn ↗</span>
@@ -678,9 +633,8 @@
 
       </div>
     </section>
-  <!-- =========================
-       FOOTER
-       ========================= -->
+  </main>
+
   <footer class="site-footer">
     <div class="max-w-[1280px] mx-auto px-6 md:px-12">
       <div class="footer-row">
@@ -706,9 +660,6 @@
     </div>
   </footer>
 
-  <!-- ==========================================
-       LIGHTBOX (email previews)
-       ========================================== -->
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Email preview" hidden>
     <div class="lightbox-backdrop" data-lb-close></div>
     <button type="button" class="lb-btn lb-close" data-lb-close aria-label="Close preview">
@@ -731,12 +682,10 @@
     <p class="lb-caption" id="lbCaption"></p>
   </div>
 
-<!-- ==========================================
-       LEAD MAGNET — floating button
-       ========================================== -->
-  <button type="button" id="leadFab" class="fixed bottom-6 right-6 z-40 bg-surface border border-border-subtle hover:border-accent shadow-2xl px-5 py-3 rounded-full flex items-center gap-3 transition-all duration-300 group cursor-pointer" aria-haspopup="dialog" aria-controls="leadModal">
+
+  <button type="button" id="leadFab" class="fixed bottom-6 right-6 z-40 bg-surface border border-border-subtle hover:border-accent shadow-2xl px-5 py-3 rounded-full flex items-center gap-3 transition-all duration-300 group cursor-pointer hidden" aria-haspopup="dialog" aria-controls="leadModal">
     <span class="font-mono text-[10px] tracking-widest uppercase text-text-primary">
-      FREE · THE EMAIL DESIGN SYSTEM 
+      FREE · THE RETENTION PLAYBOOK 
       <span class="text-accent group-hover:translate-x-1 inline-block transition-transform duration-300" aria-hidden="true">→</span>
     </span>
     <span class="text-accent" aria-hidden="true">
@@ -747,81 +696,90 @@
     </span>
   </button>
 
-  <!-- ==========================================
-       LEAD MAGNET — modal
-       ========================================== -->
-  <div id="leadModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-primary/90 backdrop-blur-sm hidden" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
+
+  <div id="leadModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-primary/95 backdrop-blur-sm hidden" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
     
-    <!-- Backdrop (Clicking this closes the modal) -->
     <div class="absolute inset-0 cursor-pointer" data-lead-close></div>
     
-    <!-- Modal Panel -->
-    <div class="relative bg-surface border border-border-subtle p-8 md:p-10 max-w-lg w-full shadow-2xl">
+    <div class="relative bg-bg-primary border border-border-subtle p-8 md:p-10 max-w-lg w-full shadow-2xl rounded-[6px]">
       
-      <!-- Close X -->
-      <button type="button" class="absolute top-4 right-4 text-text-secondary hover:text-text-primary transition-colors p-2" data-lead-close aria-label="Close">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-          <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
-        </svg>
+      <button type="button" class="absolute top-4 right-4 text-text-secondary hover:text-text-primary transition-colors p-2 text-xl" data-lead-close aria-label="Dismiss Modal">
+        &times;
       </button>
       
-      <p class="font-mono text-[10px] tracking-widest uppercase text-accent mb-4">FREE · NO OPT-IN · NO LIST</p>
+      <span class="font-mono text-[10px] tracking-widest uppercase text-accent block mb-4">SYSTEM VAULT // UNLOCKED</span>
+      
       <h2 id="leadModalTitle" class="font-serif text-3xl md:text-4xl text-text-primary mb-4 tracking-tight">
-        <em>The Email Design System.</em>
+        Get the exact 8-flow retention engine running behind <i>CLiYRA.</i>
       </h2>
+      
       <p class="text-text-secondary text-sm md:text-base leading-relaxed mb-6">
-        The exact framework I use to run email for DTC brands. Build a brand-locked email engine in Claude in about 90 minutes. Same system I run on every client engagement.
+        Zero corporate theory. Download the full unredacted backend playbook to stop bleeding your ad margins to the single-purchase trap.
       </p>
       
-      <ul class="text-sm md:text-base text-text-primary space-y-3 mb-8">
-        <li class="flex items-center gap-3"><span class="text-accent">✓</span> The five-layer framework</li>
-        <li class="flex items-center gap-3"><span class="text-accent">✓</span> The master prompt (copy-paste ready)</li>
-        <li class="flex items-center gap-3"><span class="text-accent">✓</span> A worked example, end to end</li>
-      </ul>
+      <form class="flex flex-col gap-3" action="https://manage.kmail-lists.com/subscriptions/subscribe" method="POST" target="_blank" novalidate="novalidate">
+        
+        <input type="hidden" name="g" value="[YOUR_LIST_ID_HERE]">
+        
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input type="text" class="w-full bg-surface border border-border-subtle focus:border-accent rounded-[6px] padding p-4 text-text-primary placeholder-[#5A5C63] text-sm outline-none transition-colors duration-200" name="first_name" id="first_name" placeholder="First name" required />
+          
+          <input type="email" class="w-full bg-surface border border-border-subtle focus:border-accent rounded-[6px] padding p-4 text-text-primary placeholder-[#5A5C63] text-sm outline-none transition-colors duration-200" name="email" id="email" placeholder="Founder email" required />
+        </div>
+        
+        <button type="submit" class="btn-primary w-full text-center flex justify-center items-center mt-2 uppercase font-semibold text-sm tracking-wider">
+          ACCESS THE BLUEPRINT
+        </button>
+      </form>
       
-      <a href="assets/the-email-design-system.pdf" id="leadDownload" class="btn-primary w-full text-center flex justify-center items-center mb-5" download>
-        Download the PDF →
-      </a>
-      
-      <button type="button" class="w-full text-center text-[10px] font-mono text-text-secondary hover:text-text-primary transition-colors uppercase tracking-widest" data-lead-close>
-        No thanks, close
-      </button>
+      <span class="font-mono text-[10px] text-text-tertiary text-center block mt-4 tracking-wide">No spam. Just the complete infrastructure.</span>
     </div>
   </div>
 
-  <!-- External Script -->
   <script src="script.js"></script>
 
-  <!-- Hardcoded logic for the Lead Magnet to guarantee it fires -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const fab = document.getElementById('leadFab');
       const modal = document.getElementById('leadModal');
       const closeTriggers = document.querySelectorAll('[data-lead-close]');
+      
+      // Open modal configuration helper
+      window.openRetentionModal = function() {
+        modal.classList.remove('hidden');
+        fab.classList.add('hidden'); // Hide launcher while modal is running
+        document.body.style.overflow = 'hidden'; 
+      };
 
-      if (fab && modal) {
-        // Open the modal and lock background scrolling
-        fab.addEventListener('click', () => {
-          modal.classList.remove('hidden');
-          document.body.style.overflow = 'hidden'; 
-        });
+      // Close modal configuration helper
+      window.closeRetentionModal = function() {
+        modal.classList.add('hidden');
+        fab.classList.remove('hidden'); // Reveal clean corner button persistently
+        document.body.style.overflow = ''; 
+      };
 
-        // Close the modal and restore background scrolling
-        closeTriggers.forEach(trigger => {
-          trigger.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            document.body.style.overflow = ''; 
-          });
-        });
+      // 1. Automated 5-Second Delay Logic
+      setTimeout(() => {
+        // If modal hasn't been explicitly opened manually, pop it into view automatically
+        if (modal.classList.contains('hidden')) {
+          openRetentionModal();
+        }
+      }, 5000);
 
-        // Allow closing with the Escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-          }
-        });
-      }
+      // 2. Intercept Event Launcher Triggers
+      fab.addEventListener('click', openRetentionModal);
+
+      // 3. Intercept Event Dismiss Closures
+      closeTriggers.forEach(trigger => {
+        trigger.addEventListener('click', closeRetentionModal);
+      });
+
+      // 4. Fallback Global Escape Key Trigger
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeRetentionModal();
+        }
+      });
     });
   </script>
 </body>
