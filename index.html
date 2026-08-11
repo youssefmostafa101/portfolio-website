@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yusef — Email Marketing & Retention for DTC Brands</title>
   <meta property="og:title" content="Yusef — Email Marketing & Retention for DTC Brands">
-  <meta name="description" content="High-performance lifecycle marketing and retention systems for Direct-to-Consumer brands.">
+  <meta name="description" content="High-performance lifecycle marketing and retention systems for Direct-to-Consumer brands and agencies.">
   <meta property="og:description" content="Complete email + SMS retention systems built specifically for DTC brands." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://yusef.info" />
@@ -45,6 +45,33 @@
   </script>
 
   <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Clean layout overrides for the flat email display */
+    .flat-email-display {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: var(--surface);
+      margin-bottom: 2rem;
+    }
+    .flat-email-display img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .flat-email-caption {
+      padding: 12px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
 </head>
 <body class="bg-bg-primary text-text-primary font-sans antialiased">
 
@@ -64,7 +91,7 @@
         <a href="#work" class="text-text-secondary hover:text-text-primary transition-colors">Work</a>
         <a href="#process" class="text-text-secondary hover:text-text-primary transition-colors">Process</a>
         <a href="#faq" class="text-text-secondary hover:text-text-primary transition-colors">FAQ</a>
-        <a href="#contact" class="btn-ghost-sm">Book Call</a>
+        <a href="#contact" class="btn-ghost-sm">Hire Me</a>
       </nav>
       <button id="menuToggle" aria-label="Toggle menu" aria-expanded="false" class="md:hidden text-text-primary p-2">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -79,27 +106,31 @@
       <a href="#work" class="mobile-link">Work</a>
       <a href="#process" class="mobile-link">Process</a>
       <a href="#faq" class="mobile-link">FAQ</a>
-      <a href="#contact" class="mobile-link mobile-link-accent">Book A 15-Min Discovery Call</a>
+      <a href="#contact" class="mobile-link mobile-link-accent">Hire Me</a>
     </div>
   </header>
 
   <main id="main">
 
     <section id="hero" class="hero-section">
-      <div class="max-w-[1280px] mx-auto px-6 md:px-12 text-center">
-        <p class="mono-label mb-12 md:mb-16">EMAIL MARKETING · DTC Brands</p>
+      <div class="max-w-[1280px] mx-auto px-6 md:px-12 text-center flex flex-col items-center">
+        
+        <a href="https://credential.klaviyo.com/f54944b9-e0f7-4b4a-b273-fea0d60761e5#acc.q9iU6tdn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-surface border border-border-subtle rounded-full px-4 py-2 mb-8 hover:border-accent transition-colors">
+            <img src="a2731c81-cc55-4383-b9e3-0b88656cf227.png" alt="Klaviyo Academy Certificate" class="w-6 h-6 rounded-full" />
+            <span class="font-mono text-[10px] tracking-widest uppercase text-text-primary">Klaviyo Master Certified</span>
+        </a>
 
         <h1 class="hero-headline">
           <em>DTC email.</em> <span class="non-italic">Built</span> <em>to compound.</em>
         </h1>
 
         <p class="hero-subhead">
-          Email + SMS retention for DTC brands. Eight flows live in week one.
-          Three campaigns a week, structured by a four-week rotation that never repeats an angle.
+          Fast-turnaround campaign execution and automated flow implementations. 
+          Deliverable-based retention support for DTC brands and agencies.
         </p>
 
-        <div class="hero-ctas">
-          <a href="#contact" class="btn-primary">Book A 15-Min Discovery Call</a>
+        <div class="hero-ctas mt-8">
+          <a href="#contact" class="btn-primary">Hire via Upwork</a>
           <button type="button" onclick="openRetentionModal()" class="btn-ghost">Download Playbook</button>
         </div>
 
@@ -127,8 +158,8 @@
           <p>
             I build the opposite — complete retention systems that treat email as the asset
             it is. Eight foundational flows that recover behavioral signal automatically.
-            Three strategic campaigns per week built around a 3-pillar buying-objection
-            framework, so every email solves one of the three reasons people don't buy.
+            Strategic campaigns built around a 3-pillar buying-objection
+            framework, so every email solves one of the reasons people don't buy.
             No blasts. No fluff. No discount-week churn.
           </p>
         </div>
@@ -146,27 +177,27 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-16">
           <article class="service-card">
-            <span class="corner-label">30+ EMAILS</span>
-            <h3 class="card-headline">8 Foundational Flows</h3>
+            <span class="corner-label">FLOWS</span>
+            <h3 class="card-headline">Automated Architecture</h3>
             <p class="card-body">Every behavioral trigger covered. Welcome, Cart, Checkout, Browse, Site, Post-Purchase, Winback, Sunset.</p>
           </article>
 
           <article class="service-card">
-            <span class="corner-label">52 CAMPAIGNS / YR</span>
-            <h3 class="card-headline">Campaign Engine</h3>
-            <p class="card-body">3 emails per week rotating across the 3 buying objections. A 4-week cycle that never repeats an angle.</p>
+            <span class="corner-label">CAMPAIGNS</span>
+            <h3 class="card-headline">Campaign Production</h3>
+            <p class="card-body">End-to-end execution rotating across the 3 buying objections. Fast turnaround for agency overflow and brand sprints.</p>
           </article>
 
           <article class="service-card">
-            <span class="corner-label">26 SMS / YR</span>
+            <span class="corner-label">SMS</span>
             <h3 class="card-headline">SMS Retention</h3>
-            <p class="card-body">Bi-weekly SMS in 5 proven formats. Punchy. Purposeful. Never spam.</p>
+            <p class="card-body">Bi-weekly SMS in proven formats. Punchy. Purposeful. Never spam.</p>
           </article>
 
           <article class="service-card">
-            <span class="corner-label">KPI · DRIVEN</span>
-            <h3 class="card-headline">Weekly Optimization</h3>
-            <p class="card-body">Monday KPI review + Friday Loom report. Surgical overrides when data demands it.</p>
+            <span class="corner-label">EXECUTION</span>
+            <h3 class="card-headline">Design & Copy</h3>
+            <p class="card-body">High-converting copywriting paired with clean, on-brand Figma design rendering ready for the inbox.</p>
           </article>
         </div>
       </div>
@@ -181,8 +212,7 @@
           <em>Email has a content problem. I built the engine.</em>
         </h2>
         <p class="prose-intro">
-          Three pillars. Nine campaign types. One rotation that never runs dry. Here's the
-          framework that powers every email I send.
+          Three pillars. Nine campaign types. Here's the framework that powers every email I write and design.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-16">
@@ -222,16 +252,6 @@
             </ul>
           </article>
         </div>
-
-        <div class="rotation-block">
-          <p class="mono-label">THE 4-WEEK ROTATION</p>
-          <h3 class="rotation-headline">12 emails, 14 touchpoints, zero repeated angles.</h3>
-          <p class="card-body max-w-2xl">
-            Every Monday is Pillar 1. Wednesday is Pillar 2. Friday is Pillar 3.
-            SMS fires every other Thursday. The cycle resets at week 5 — same structure,
-            new content. Built so your list never goes cold.
-          </p>
-        </div>
       </div>
     </section>
 
@@ -242,42 +262,10 @@
         <p class="section-label">— 04 · RECENT WORK</p>
         <h2 class="section-headline"><em>See the work.</em></h2>
         <p class="prose-intro">
-          One client brand and two prototypes — each built brand-first from the same Design
-          System pipeline. Click any email to open it full-size.
+          Prototypes built brand-first from a unified Design System pipeline. High-fidelity rendering with a focus on conversion and clean typography.
         </p>
 
-        <div class="brand-group">
-          <div class="brand-header">
-            <h3 class="brand-name"><em>CLiYRA</em></h3>
-            <div class="pill-row">
-              <span class="pill"><span class="pill-dot dot-client" aria-hidden="true"></span>Client</span>
-              <span class="pill"><span class="pill-dot dot-genre" aria-hidden="true"></span>Welcome Flow</span>
-              <span class="pill"><span class="pill-dot dot-genre" aria-hidden="true"></span>Founder Email</span>
-            </div>
-          </div>
-          <div class="email-pair">
-            <figure class="work-email">
-              <button type="button" class="work-email-btn" data-lightbox data-src="assets/work/cliyra-01.png" data-caption="CLIYRA · WELCOME 02 · FOUNDER STORY">
-                <img src="assets/work/cliyra-01.png" alt="CLiYRA welcome email 2 — founder story, &lsquo;I started this because nothing worked&rsquo;" loading="lazy" />
-              </button>
-              <figcaption class="work-email-caption">CLIYRA · WELCOME 02 · FOUNDER STORY</figcaption>
-            </figure>
-            <figure class="work-email">
-              <button type="button" class="work-email-btn" data-lightbox data-src="assets/work/cliyra-02.png" data-caption="CLIYRA · WELCOME 05 · WHO IT'S FOR">
-                <img src="assets/work/cliyra-02.png" alt="CLiYRA welcome email — who it&rsquo;s for, and who it isn&rsquo;t" loading="lazy" />
-              </button>
-              <figcaption class="work-email-caption">CLIYRA · WELCOME 05 · WHO IT'S FOR</figcaption>
-            </figure>
-          </div>
-          <p class="brand-narrative">
-            My own brand. The same six-email welcome flow ships with every engagement — built
-            brand-first from the Design System layer up, so every email inherits voice and visual
-            tokens automatically. Pulled the founder story and the positioning email because they
-            show the system on opposite ends of the trust ladder.
-          </p>
-        </div>
-
-        <div class="brand-group">
+        <div class="brand-group mt-16">
           <div class="brand-header">
             <h3 class="brand-name"><em>Lab Series</em></h3>
             <div class="pill-row">
@@ -286,28 +274,22 @@
               <span class="pill"><span class="pill-dot dot-genre" aria-hidden="true"></span>Case Study</span>
             </div>
           </div>
-          <div class="email-pair">
-            <figure class="work-email">
-              <button type="button" class="work-email-btn" data-lightbox data-src="assets/work/labseries-01.png" data-caption="LAB SERIES · CASE STUDY · RESULTS">
-                <img src="assets/work/labseries-01.png" alt="Lab Series case study email — six weeks, three products, real results" loading="lazy" />
-              </button>
-              <figcaption class="work-email-caption">LAB SERIES · CASE STUDY · RESULTS</figcaption>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <figure class="flat-email-display">
+              <img src="assets/work/labseries-01.png" alt="Lab Series case study email" loading="lazy" />
+              <figcaption class="flat-email-caption">LAB SERIES · CASE STUDY · RESULTS</figcaption>
             </figure>
-            <figure class="work-email">
-              <button type="button" class="work-email-btn" data-lightbox data-src="assets/work/labseries-02.png" data-caption="LAB SERIES · BROWSE FLOW · MECHANISM">
-                <img src="assets/work/labseries-02.png" alt="Lab Series browse-abandon email — multi-action face wash mechanism" loading="lazy" />
-              </button>
-              <figcaption class="work-email-caption">LAB SERIES · BROWSE FLOW · MECHANISM</figcaption>
+            <figure class="flat-email-display">
+              <img src="assets/work/labseries-02.png" alt="Lab Series browse-abandon email" loading="lazy" />
+              <figcaption class="flat-email-caption">LAB SERIES · BROWSE FLOW · MECHANISM</figcaption>
             </figure>
           </div>
           <p class="brand-narrative">
-            Built as a prototype — not a live engagement. Lab Series sits at the premium end of
-            men's skincare, so the system was tuned for restraint: cleaner typography, harder edges,
-            fewer adjectives. Same pipeline. Different brand profile.
+            Lab Series sits at the premium end of men's skincare, so the system was tuned for restraint: cleaner typography, harder edges, fewer adjectives. Same pipeline. Different brand profile.
           </p>
         </div>
 
-        <div class="brand-group">
+        <div class="brand-group mt-24">
           <div class="brand-header">
             <h3 class="brand-name"><em>Brickell</em></h3>
             <div class="pill-row">
@@ -316,28 +298,22 @@
               <span class="pill"><span class="pill-dot dot-genre" aria-hidden="true"></span>Campaign</span>
             </div>
           </div>
-          <div class="email-pair">
-            <figure class="work-email">
-              <button type="button" class="work-email-btn" data-lightbox data-src="assets/work/brickell-01.png" data-caption="BRICKELL · CART FLOW · RECOVERY">
-                <img src="assets/work/brickell-01.png" alt="Brickell cart-recovery email — you left this behind" loading="lazy" />
-              </button>
-              <figcaption class="work-email-caption">BRICKELL · CART FLOW · RECOVERY</figcaption>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <figure class="flat-email-display">
+              <img src="assets/work/brickell-01.png" alt="Brickell cart-recovery email" loading="lazy" />
+              <figcaption class="flat-email-caption">BRICKELL · CART FLOW · RECOVERY</figcaption>
             </figure>
-            <figure class="work-email">
-              <button type="button" class="work-email-btn" data-lightbox data-src="assets/work/Brickell-02.jpg" data-caption="BRICKELL · CAMPAIGN · OBJECTION KILLER">
-                <img src="assets/work/Brickell-02.jpg" alt="Brickell campaign email" loading="lazy" />
-              </button>
-              <figcaption class="work-email-caption">BRICKELL · CAMPAIGN · OBJECTION KILLER</figcaption>
+            <figure class="flat-email-display">
+              <img src="assets/work/Brickell-02.jpg" alt="Brickell campaign email" loading="lazy" />
+              <figcaption class="flat-email-caption">BRICKELL · CAMPAIGN · OBJECTION KILLER</figcaption>
             </figure>
           </div>
-          <p class="brickell natural-positioning brand">
-            Prototype run on Brickell's natural-positioning brand. A cart-recovery email and an
-            objection-killer campaign, both built around the buying-objection framework. Both
-            shipped from the same Design System file in under thirty minutes each.
+          <p class="brand-narrative">
+            Prototype run on Brickell's natural-positioning brand. A cart-recovery email and an objection-killer campaign, both built around the buying-objection framework. 
           </p>
         </div>
         
-        <div class="brand-group">
+        <div class="brand-group mt-24">
           <div class="brand-header">
             <h3 class="brand-name"><em>Graza</em></h3>
             <div class="pill-row">
@@ -346,18 +322,14 @@
               <span class="pill"><span class="pill-dot dot-genre" aria-hidden="true"></span>Winback</span>
             </div>
           </div>
-          <div class="email-pair">
-            <figure class="work-email">
-              <button type="button" class="work-email-btn" data-lightbox data-src="assets/work/Graza-01.jpg" data-caption="GRAZA · POST-PURCHASE · EXPECTATION MANAGEMENT">
-                <img src="assets/work/Graza-01.jpg" alt="Graza post-purchase order confirmation email" loading="lazy" />
-              </button>
-              <figcaption class="work-email-caption">GRAZA · POST-PURCHASE · EXPECTATION MANAGEMENT</figcaption>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <figure class="flat-email-display">
+              <img src="assets/work/Graza-01.jpg" alt="Graza post-purchase order confirmation email" loading="lazy" />
+              <figcaption class="flat-email-caption">GRAZA · POST-PURCHASE · EXPECTATION MANAGEMENT</figcaption>
             </figure>
-            <figure class="work-email">
-              <button type="button" class="work-email-btn" data-lightbox data-src="assets/work/Graza-02.jpg" data-caption="GRAZA · WINBACK · RE-ENGAGEMENT">
-                <img src="assets/work/Graza-02.jpg" alt="Graza winback email checking in" loading="lazy" />
-              </button>
-              <figcaption class="work-email-caption">GRAZA · WINBACK · RE-ENGAGEMENT</figcaption>
+            <figure class="flat-email-display">
+              <img src="assets/work/Graza-02.jpg" alt="Graza winback email checking in" loading="lazy" />
+              <figcaption class="flat-email-caption">GRAZA · WINBACK · RE-ENGAGEMENT</figcaption>
             </figure>
           </div>
           <p class="brand-narrative">
@@ -365,7 +337,7 @@
           </p>
         </div>
 
-         <div class="brand-group">
+         <div class="brand-group mt-24">
           <div class="brand-header">
             <h3 class="brand-name"><em>Fable Pets</em></h3>
             <div class="pill-row">
@@ -373,12 +345,10 @@
               <span class="pill"><span class="pill-dot dot-genre" aria-hidden="true"></span>Cart Flow</span>
             </div>
           </div>
-          <div class="email-pair">
-            <figure class="work-email">
-              <button type="button" class="work-email-btn" data-lightbox data-src="assets/work/Fabel-01.jpg" data-caption="FABLE · CART FLOW · ABANDONMENT">
-                <img src="assets/work/Fabel-01.jpg" alt="Fable cart abandonment email" loading="lazy" />
-              </button>
-              <figcaption class="work-email-caption">FABLE · CART FLOW · ABANDONMENT</figcaption>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <figure class="flat-email-display">
+              <img src="assets/work/Fabel-01.jpg" alt="Fable cart abandonment email" loading="lazy" />
+              <figcaption class="flat-email-caption">FABLE · CART FLOW · ABANDONMENT</figcaption>
             </figure>
           </div>
           <p class="brand-narrative">
@@ -390,45 +360,39 @@
     </section>
 
     <div class="section-divider"></div>
+    
     <section id="process" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
         <p class="section-label">— 05 · HOW IT WORKS</p>
-        <h2 class="section-headline"><em>From signed to live in seven days.</em></h2>
+        <h2 class="section-headline"><em>Speed & execution.</em></h2>
 
         <ol class="timeline">
           <li class="timeline-step">
-            <span class="timeline-day">DAY 01</span>
+            <span class="timeline-day">PHASE 01</span>
             <div class="timeline-content">
-              <h3 class="timeline-title">Discovery + Intake</h3>
-              <p class="card-body">15-minute kickoff call. I pull brand assets, Klaviyo + Shopify access, customer profile, and your existing assets.</p>
+              <h3 class="timeline-title">Intake & Briefing</h3>
+              <p class="card-body">Clear project scoping. I pull brand assets, Klaviyo + Shopify access, and the specific deliverables required.</p>
             </div>
           </li>
           <li class="timeline-step">
-            <span class="timeline-day">DAY 02</span>
+            <span class="timeline-day">PHASE 02</span>
             <div class="timeline-content">
-              <h3 class="timeline-title">Brand System Build</h3>
-              <p class="card-body">I build your Design System and brand profile. Every email going forward inherits these tokens automatically.</p>
+              <h3 class="timeline-title">Copy & Design System</h3>
+              <p class="card-body">I adapt to your existing design language or build a fresh component system. Every email going forward inherits these tokens.</p>
             </div>
           </li>
           <li class="timeline-step">
-            <span class="timeline-day">DAY 03–04</span>
+            <span class="timeline-day">PHASE 03</span>
             <div class="timeline-content">
-              <h3 class="timeline-title">Infrastructure</h3>
-              <p class="card-body">Klaviyo account audit. Universal components built. Attribution + UTM tracking configured. Flow shells created.</p>
+              <h3 class="timeline-title">Production & Build</h3>
+              <p class="card-body">High-converting copywriting + Figma rendering. For agencies, this acts as seamless, white-labeled overflow production.</p>
             </div>
           </li>
           <li class="timeline-step">
-            <span class="timeline-day">DAY 05–06</span>
+            <span class="timeline-day">PHASE 04</span>
             <div class="timeline-content">
-              <h3 class="timeline-title">Welcome Flow Live</h3>
-              <p class="card-body">All 6 Welcome emails shipped to Klaviyo. Flow triggers, smart sending, and quiet hours configured.</p>
-            </div>
-          </li>
-          <li class="timeline-step">
-            <span class="timeline-day">DAY 07</span>
-            <div class="timeline-content">
-              <h3 class="timeline-title">First Campaign + Loom</h3>
-              <p class="card-body">First strategic campaign goes live. First weekly Loom delivered with KPIs and what's shipping next week.</p>
+              <h3 class="timeline-title">Klaviyo Implementation</h3>
+              <p class="card-body">Emails shipped directly to Klaviyo. Flow triggers configured, segmentation applied, and final QA completed before launch.</p>
             </div>
           </li>
         </ol>
@@ -437,67 +401,20 @@
 
     <div class="section-divider"></div>
 
-    <section id="selection" class="section">
-      <div class="max-w-[1280px] mx-auto px-6 md:px-12">
-        <p class="section-label">— 06 · SELECTION</p>
-        <h2 class="section-headline"><em>Who I take on.</em></h2>
-        <p class="prose-intro">
-          The system works for any qualified DTC brand
-          that fits the profile below.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-16">
-          <div class="selection-panel">
-            <p class="mono-label">WHO I BUILD FOR</p>
-            <h3 class="selection-headline"><em>The fit.</em></h3>
-            <ul class="check-list">
-              <li><span class="check-mark" aria-hidden="true">✓</span> DTC brands</li>
-              <li><span class="check-mark" aria-hidden="true">✓</span> Doing $30K+/month minimum revenue</li>
-              <li><span class="check-mark" aria-hidden="true">✓</span> Brand owners who treat email as a real channel — not an afterthought</li>
-              <li><span class="check-mark" aria-hidden="true">✓</span> Founders ready to commit to a 90-day system build</li>
-            </ul>
-          </div>
-
-          <div class="selection-panel">
-            <p class="mono-label">WHO I DON'T</p>
-            <h3 class="selection-headline"><em>The mismatch.</em></h3>
-            <ul class="cross-list">
-              <li><span class="cross-mark" aria-hidden="true">×</span> Sub-$30K/month brands — too early for what the system delivers</li>
-              <li><span class="cross-mark" aria-hidden="true">×</span> Founders chasing a 30-day spike, not a 90-day compound</li>
-              <li><span class="cross-mark" aria-hidden="true">×</span> Brands that treat email as a Friday discount blast</li>
-              <li><span class="cross-mark" aria-hidden="true">×</span> Anyone who wants 50 emails a month — volume isn&rsquo;t the answer</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
     <section id="about" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
-        <p class="section-label">— 07 · ABOUT</p>
+        <p class="section-label">— 06 · ABOUT</p>
         <h2 class="section-headline"><em>Why I do this.</em></h2>
         <div class="prose-block">
           <p>
-            I started by building my own brand — <a href="https://cliyra.com" target="_blank" rel="noopener" class="text-link">CLiYRA</a>,
-            men's skincare for guys who've tried everything. The product side was the easy
-            part. What caught my attention was email: the highest-margin channel I had,
-            sitting on a real list, doing nothing.
+            I specialize in building high-performance email and SMS retention systems specifically for Direct-to-Consumer e-commerce brands. 
+            My approach strips away the fluff and focuses entirely on what drives LTV: deep behavioral segmentation, rapid execution, and design that actually converts.
           </p>
           <p>
-            So I went deep on it. Built the flows for CLiYRA first. Then the campaign
-            engine. Every email I sent taught me something I could systemize. The framework
-            on this site is what came out of that work.
-          </p>
-          <p>
-            Other DTC founders are sitting on the same gap — great product, real
-            customers, email list doing nothing. I take on a small number of brands at a
-            time and run the same system for them that I run for mine.
+            I structure my work purely on deliverable-based projects and sprints. Whether it's building out an 8-flow foundational infrastructure from scratch or handling weekly campaign overflow for boutique marketing agencies, I build systems that treat email as the highest-margin asset a brand owns.
           </p>
         </div>
-        <p class="signature">— YUSEF · FOUNDER, <a href="https://cliyra.com" target="_blank" rel="noopener" class="signature-link">CLIYRA ↗</a></p>
+        <p class="signature">— YUSEF · KLAVIYO SPECIALIST</p>
       </div>
     </section>
 
@@ -505,17 +422,17 @@
 
     <section id="faq" class="section">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12">
-        <p class="section-label">— 08 · COMMON QUESTIONS</p>
+        <p class="section-label">— 07 · COMMON QUESTIONS</p>
         <h2 class="section-headline"><em>What people ask.</em></h2>
 
         <div class="faq-list mt-16">
           <div class="faq-item">
             <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
-              <span>How many clients do you take on?</span>
+              <span>Do you work with agencies?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div id="faq-1" class="faq-answer" hidden>
-              <p>A small roster, intentionally. I cap capacity so every brand gets the strategic depth that produces results — not a queue of accounts ground through the same template. If a spot is open, the site is live. If it's not, you'll know.</p>
+              <p>Yes. I provide reliable, async overflow support for DTC agencies. I handle end-to-end campaign execution (Copy, Figma, Klaviyo Scheduling) so your team can scale capacity without adding full-time headcount.</p>
             </div>
           </div>
 
@@ -525,17 +442,17 @@
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div id="faq-2" class="faq-answer" hidden>
-              <p>Because I run a DTC brand myself. I know the customer, the objections, the buying language, the seasonal patterns. Outside this niche I'd be guessing — and you'd be paying for my learning curve.</p>
+              <p>Because I know the e-commerce customer, the objections, the buying language, and the seasonal patterns. Outside this niche I'd be guessing — and you'd be paying for my learning curve.</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
-              <span>How fast will I see results?</span>
+              <span>How fast is turnaround?</span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div id="faq-3" class="faq-answer" hidden>
-              <p>Welcome Flow live by Day 7. First campaign live in Week 2. Revenue impact typically visible within 30 days. Full system compound effect in 90 days.</p>
+              <p>For standard campaign requests, turnaround is typically 24–48 hours. Full infrastructure flow builds take about 7–14 days depending on the scope of the project.</p>
             </div>
           </div>
 
@@ -545,7 +462,7 @@
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div id="faq-5" class="faq-answer" hidden>
-              <p>Fair question. The clearest answer is the work itself. The emails in Section 04 above are from <a href="https://cliyra.com" target="_blank" rel="noopener" class="text-link">CLiYRA</a> — my own men's skincare brand — running on the same system I'd build for yours. Same pipeline, same standard, every send. Scroll up, look at what ships, and decide.</p>
+              <p>Fair question. The clearest answer is the work itself. I am a Master Certified Klaviyo Partner, and the portfolio above demonstrates my strategy and design standards. Same pipeline, same standard, every send.</p>
             </div>
           </div>
 
@@ -555,17 +472,7 @@
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div id="faq-6" class="faq-answer" hidden>
-              <p>Klaviyo admin access, Shopify collaborator access, brand assets (logo, fonts, brand guidelines if you have them), and 15 minutes for the kickoff call. That's it.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" aria-controls="faq-7">
-              <span>What if I want to cancel?</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div id="faq-7" class="faq-answer" hidden>
-              <p>After the 90-day initial term, it's month-to-month with 14 days notice. No long contracts, no exit fees. I'd rather you stay because the work pays for itself — if it doesn't, I want to know.</p>
+              <p>Klaviyo access, Shopify collaborator access, brand assets (logo, fonts, brand guidelines), and the project brief. That's it.</p>
             </div>
           </div>
         </div>
@@ -577,48 +484,31 @@
     <section id="contact" class="section section-cta">
       <div class="max-w-[1280px] mx-auto px-6 md:px-12 text-center">
         
-        <p class="section-label justify-center">— 09 · NEXT STEPS</p>
+        <p class="section-label justify-center">— 08 · NEXT STEPS</p>
         
         <h2 class="section-headline section-headline-cta">
-          <em>Ready to scale your <span class="non-italic text-accent">retention?</span></em>
+          <em>Ready for better <span class="non-italic text-accent">execution?</span></em>
         </h2>
         
         <p class="prose-intro mx-auto">
-          Choose the engagement model that aligns with your brand's current infrastructure and revenue scale.
+          I work on a sprint and deliverable basis to ensure quick turnarounds and high ROI.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-16 max-w-5xl mx-auto text-left">
+        <div class="grid grid-cols-1 mt-16 max-w-2xl mx-auto text-left">
             
-          <div class="bg-surface border border-border-subtle p-8 md:p-12 flex flex-col justify-between transition-colors duration-300 hover:border-accent group">
+          <div class="bg-surface border border-border-subtle p-8 md:p-12 flex flex-col justify-between transition-colors duration-300 hover:border-accent group rounded-lg">
             <div>
               <span class="font-mono text-xs uppercase tracking-widest text-text-secondary block mb-5 group-hover:text-accent transition-colors">
-                01 / Retainer
+                Freelance / Contract
               </span>
               <h3 class="font-serif text-3xl md:text-4xl text-text-primary mb-4 tracking-tight">
-                Full Retention System
+                Project Sprints & Agency Overflow
               </h3>
               <p class="text-text-secondary leading-relaxed mb-10">
-                Complete channel ownership. Built for scaling DTC brands who want lifecycle marketing completely handled to compound customer lifetime value long-term.
+                Discrete performance tasks, high-converting flow setups, account cleanups, or reliable weekly campaign production for your agency. Securely handled under defined project scopes.
               </p>
             </div>
-            <a href="https://calendly.com/yusef-cliyra/15min" target="_blank" rel="noopener noreferrer" class="btn-primary w-full text-center flex justify-center items-center">
-              Book a 15-Min Fit Check
-            </a>
-          </div>
-
-          <div class="bg-surface border border-border-subtle p-8 md:p-12 flex flex-col justify-between transition-colors duration-300 hover:border-text-secondary group">
-            <div>
-              <span class="font-mono text-xs uppercase tracking-widest text-text-secondary block mb-5 group-hover:text-text-primary transition-colors">
-                02 / Sprint
-              </span>
-              <h3 class="font-serif text-3xl md:text-4xl text-text-primary mb-4 tracking-tight">
-                Fixed-Price Projects
-              </h3>
-              <p class="text-text-secondary leading-relaxed mb-10">
-                Discrete performance tasks. High-converting flow setups, account cleanups, or a comprehensive retention audit handled securely under defined project scopes.
-              </p>
-            </div>
-            <a href="https://www.upwork.com/freelancers/~016251101210ee40de?mp_source=share" target="_blank" rel="noopener noreferrer" class="btn-ghost w-full text-center flex justify-center items-center">
+            <a href="https://www.upwork.com/freelancers/~016251101210ee40de?mp_source=share" target="_blank" rel="noopener noreferrer" class="btn-primary w-full text-center flex justify-center items-center">
               Hire via Upwork ↗
             </a>
           </div>
@@ -660,29 +550,6 @@
     </div>
   </footer>
 
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Email preview" hidden>
-    <div class="lightbox-backdrop" data-lb-close></div>
-    <button type="button" class="lb-btn lb-close" data-lb-close aria-label="Close preview">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-        <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
-      </svg>
-    </button>
-    <div class="lb-controls">
-      <button type="button" class="lb-btn" data-lb-zoom-out aria-label="Zoom out">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      </button>
-      <button type="button" class="lb-btn lb-btn-text" data-lb-zoom-reset aria-label="Reset zoom">Reset</button>
-      <button type="button" class="lb-btn" data-lb-zoom-in aria-label="Zoom in">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      </button>
-    </div>
-    <div class="lb-stage" id="lbStage">
-      <img class="lb-img" id="lbImg" src="" alt="" draggable="false" />
-    </div>
-    <p class="lb-caption" id="lbCaption"></p>
-  </div>
-
-
   <button type="button" id="leadFab" class="fixed bottom-6 right-6 z-40 bg-surface border border-border-subtle hover:border-accent shadow-2xl px-5 py-3 rounded-full flex items-center gap-3 transition-all duration-300 group cursor-pointer hidden" aria-haspopup="dialog" aria-controls="leadModal">
     <span class="font-mono text-[10px] tracking-widest uppercase text-text-primary">
       FREE · THE RETENTION PLAYBOOK 
@@ -695,7 +562,6 @@
       </svg>
     </span>
   </button>
-
 
   <div id="leadModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-primary/95 backdrop-blur-sm hidden" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
     
@@ -710,7 +576,7 @@
       <span class="font-mono text-[10px] tracking-widest uppercase text-accent block mb-4">SYSTEM VAULT // UNLOCKED</span>
       
       <h2 id="leadModalTitle" class="font-serif text-3xl md:text-4xl text-text-primary mb-4 tracking-tight">
-        Get the exact 8-flow retention engine running behind <i>CLiYRA.</i>
+        Get the exact 8-flow retention engine running behind top DTC brands.
       </h2>
       
       <p class="text-text-secondary text-sm md:text-base leading-relaxed mb-6">
@@ -745,37 +611,30 @@
       const modal = document.getElementById('leadModal');
       const closeTriggers = document.querySelectorAll('[data-lead-close]');
       
-      // Open modal configuration helper
       window.openRetentionModal = function() {
         modal.classList.remove('hidden');
-        fab.classList.add('hidden'); // Hide launcher while modal is running
+        fab.classList.add('hidden');
         document.body.style.overflow = 'hidden'; 
       };
 
-      // Close modal configuration helper
       window.closeRetentionModal = function() {
         modal.classList.add('hidden');
-        fab.classList.remove('hidden'); // Reveal clean corner button persistently
+        fab.classList.remove('hidden'); 
         document.body.style.overflow = ''; 
       };
 
-      // 1. Automated 5-Second Delay Logic
       setTimeout(() => {
-        // If modal hasn't been explicitly opened manually, pop it into view automatically
         if (modal.classList.contains('hidden')) {
           openRetentionModal();
         }
       }, 5000);
 
-      // 2. Intercept Event Launcher Triggers
       fab.addEventListener('click', openRetentionModal);
 
-      // 3. Intercept Event Dismiss Closures
       closeTriggers.forEach(trigger => {
         trigger.addEventListener('click', closeRetentionModal);
       });
 
-      // 4. Fallback Global Escape Key Trigger
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
           closeRetentionModal();
